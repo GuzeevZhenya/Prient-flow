@@ -4,9 +4,38 @@
 
 ## Что это
 
-Монорепозиторий ERP для 3D-печатной мастерской (Turborepo + pnpm workspaces).
-Разработка идёт строго по `ROADMAP.md` — этапы выполняются последовательно,
+ERP для 3D-печатной мастерской и студии покраса: заказы, склад расходников
+(филамент/смола/краски), парк принтеров, расчёт себестоимости, Telegram-бот
+и десктоп-хаб для интеграции со слайсером и принтерами в локальной сети.
+
+Монорепозиторий: Turborepo + pnpm workspaces. Node >= 20, pnpm 12.
+
+**Текущее состояние:** каркас (Спринт 1.1 ✅). В `apps/*` пока только
+`package.json` с зависимостями — исходников приложений ещё нет.
+Разработка идёт строго по `ROADMAP.md`, этапы последовательно,
 не перепрыгивай вперёд без явной команды.
+
+## Карта репозитория
+
+```
+apps/
+  web/        @prient-flow/web      Next.js 15 (App Router) + React 19,
+                                    Tailwind, TanStack Query, three/r3f/drei
+  desktop/    @prient-flow/desktop  Electron 33 + electron-vite + Vite 6,
+                                    chokidar, mqtt, ws
+  bot/        @prient-flow/bot      grammY + @grammyjs/conversations,
+                                    Upstash Redis, dev: tsx, build: tsup
+packages/
+  database/   @prient-flow/database Supabase-клиенты (@supabase/supabase-js,
+                                    @supabase/ssr) + database.types.ts
+  shared/     @prient-flow/shared   Zod-схемы, pricing, константы; vitest
+  gcode-parser/ @prient-flow/gcode-parser  Парсер .gcode/.3mf; vitest
+supabase/
+  migrations/ SQL-миграции и RLS-политики
+```
+
+Внутренние пакеты подключаются как `"@prient-flow/<name>": "workspace:*"`,
+entry point — `src/index.ts` (TS напрямую, без шага сборки).
 
 ## Границы пакетов
 
@@ -15,31 +44,42 @@
   Никакой бизнес-логики в apps/* — только вызовы shared.
 - `packages/database` — Supabase-клиенты и типы БД. Типы
   `database.types.ts` генерируются командой `pnpm db:types`,
-  руками не править.
+  руками не править (сейчас там заглушка до первого запуска Supabase).
 - `packages/gcode-parser` — чистые функции без I/O, покрываются тестами.
 - `apps/web`, `apps/desktop`, `apps/bot` — тонкие слои над packages.
 
 ## Правила кода
 
-- Строгий TypeScript (`strict: true`), без `any` без крайней нужды.
+- Строгий TypeScript (`strict: true` из `tsconfig.base.json`),
+  без `any` без крайней нужды.
 - Все внешние данные (формы, API, вебхуки, конфиги принтеров,
   пейлоады из парсеров) валидируются Zod-схемами из `packages/shared`.
 - Статусы заказов/принтеров/материалов — только из констант shared,
   строки-литералы в коде запрещены.
 - Мультитенантность: каждый запрос к БД обязан быть ограничен
   `workspace_id` (на уровне RLS + явного фильтра).
-- Секреты — только через `.env`, коммитить `.env.example` с пустыми значениями.
+- Секреты — только через `.env`; коммитим `.env.example` с пустыми значениями.
 
 ## Команды
 
 ```bash
+pnpm install    # установка всех зависимостей воркспейса
 pnpm dev        # turbo dev — все приложения
 pnpm test       # тесты пакетов (vitest)
-pnpm build      # сборка
-pnpm db:start   # локальный Supabase
+pnpm build      # сборка (turbo build)
+pnpm db:start   # локальный Supabase (нужен Docker + Supabase CLI)
 pnpm db:reset   # пересоздать БД и применить миграции
-pnpm db:types   # регенерировать типы БД
+pnpm db:types   # регенерировать типы БД в packages/database
 ```
+
+## Особенности окружения (Windows)
+
+- Build-скрипты electron и esbuild одобрены через
+  `onlyBuiltDependencies` в `pnpm-workspace.yaml` + `.npmrc`.
+  Если pnpm ругается на `ERR_PNPM_IGNORED_BUILDS` —
+  `pnpm approve-builds electron esbuild -y`.
+- Поле `pnpm.*` в корневом package.json не читается pnpm 12 —
+  настройки только в `pnpm-workspace.yaml` / `.npmrc`.
 
 ## Изменения схемы БД
 
@@ -48,7 +88,10 @@ pnpm db:types   # регенерировать типы БД
 3. `pnpm db:types` — регенерировать типы.
 4. Если меняются статусы/поля — синхронно обновить Zod-схемы в shared.
 
-## Текущий фокус
+## Рабочий процесс
 
-Следующая невыполненная задача из `ROADMAP.md` — приоритет.
-После завершения спринта отметь его в ROADMAP.md (`[x]`).
+- Следующая невыполненная задача из `ROADMAP.md` — приоритет.
+  Сейчас это Спринт 1.2 (локальный Supabase).
+- После завершения спринта отметь его в `ROADMAP.md` (`[x]`) и обнови
+  раздел «Текущее состояние» в этом файле.
+- Один логический спринт = один коммит (или PR), осмысленное сообщение.
