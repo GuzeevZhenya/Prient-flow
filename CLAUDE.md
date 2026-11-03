@@ -10,8 +10,10 @@ ERP для 3D-печатной мастерской и студии покрас
 
 Монорепозиторий: Turborepo + pnpm workspaces. Node >= 20, pnpm 12.
 
-**Текущее состояние:** каркас (Спринт 1.1 ✅). В `apps/*` пока только
-`package.json` с зависимостями — исходников приложений ещё нет.
+**Текущее состояние:** каркас (Спринт 1.1 ✅) + контур качества кода
+(ESLint + Prettier + typecheck + скиллы команд). В `apps/*` пока только
+`package.json` с зависимостями и заглушка `apps/bot/src/index.ts` —
+исходников приложений ещё нет.
 Разработка идёт строго по `ROADMAP.md`, этапы последовательно,
 не перепрыгивай вперёд без явной команды.
 
@@ -65,12 +67,28 @@ entry point — `src/index.ts` (TS напрямую, без шага сборк�
 ```bash
 pnpm install    # установка всех зависимостей воркспейса
 pnpm dev        # turbo dev — все приложения
-pnpm test       # тесты пакетов (vitest)
+pnpm test       # тесты пакетов (vitest через turbo)
 pnpm build      # сборка (turbo build)
+pnpm lint       # ESLint — проверка
+pnpm lint:fix   # ESLint — автофикс
+pnpm format     # Prettier — проверка форматирования
+pnpm format:fix # Prettier — автофикс всех файлов
+pnpm typecheck  # tsc --noEmit по packages/*/src и apps/*/src
+pnpm ci:check   # lint + typecheck + format одной командой
 pnpm db:start   # локальный Supabase (нужен Docker + Supabase CLI)
 pnpm db:reset   # пересоздать БД и применить миграции
 pnpm db:types   # регенерировать типы БД в packages/database
 ```
+
+Конфиги качества: `eslint.config.mjs` (flat config, typescript-eslint),
+`.prettierrc.json` + `.prettierignore`, корневой `tsconfig.json` для typecheck.
+
+## Команды-скиллы (.kimi-code/skills/)
+
+- `/заключение` — отчёт об итогах сессии в `.docs/history/YYYY-MM-DD_printflow-summary.md`
+  (шаблон в `zaklyuchenie-command.md`).
+- `/формат` — полный цикл качества: format:fix → lint:fix → typecheck,
+  ручной дочин до зелёного, сводка пользователю (`format-command.md`).
 
 ## Особенности окружения (Windows)
 
@@ -80,6 +98,10 @@ pnpm db:types   # регенерировать типы БД в packages/databas
   `pnpm approve-builds electron esbuild -y`.
 - Поле `pnpm.*` в корневом package.json не читается pnpm 12 —
   настройки только в `pnpm-workspace.yaml` / `.npmrc`.
+- Если standalone-shim pnpm падает с путём `.tools\pnpm\<версия>` —
+  оборвалась его самодогрузка версии из поля `packageManager`.
+  Лечение: удалить `%LOCALAPPDATA%\pnpm\.tools\pnpm\<версия>*`
+  и запустить `pnpm --version` заново (скачает чисто).
 
 ## Изменения схемы БД
 
