@@ -56,13 +56,16 @@
 
 ## Этап 2 — Склад и калькулятор (apps/web + packages/shared) ⬜
 
-### Спринт 2.1 — Каркас Next.js
+### Спринт 2.1 — Каркас SPA (Vite + React + FSD) 🟡
 
-- [ ] `create-next-app`-структура в `apps/web` (App Router, TS)
-- [ ] Подключить Tailwind CSS + shadcn/ui (init, базовые компоненты)
-- [ ] TanStack Query: провайдер, devtools
-- [ ] Auth через Supabase (email/OAuth), middleware защиты `/dashboard`
-- [ ] Layout дашборда: сайдбар (Заказы / Склад / Принтеры / Клиенты / Настройки)
+- [x] Vite + React 19 + TS в `apps/web`, React Router, алиас `@/`
+- [x] FSD-структура слоёв (app/pages/widgets/features/entities/shared)
+      с README в каждом слое — см. `apps/web/ARCHITECTURE.md`
+- [x] Tailwind CSS; TanStack Query-провайдер; базовый layout (Sidebar + Header)
+- [ ] shadcn/ui-подобный UI-кит в `shared/ui` (кнопки, инпуты, модалки)
+- [ ] Auth через Supabase (email/OAuth), защищённые роуты админки
+      (обёртка над react-router вместо middleware)
+- [ ] Страница настроек workspace (тарифы, маржа, валюта)
 
 ### Спринт 2.2 — Математическое ядро (packages/shared)
 

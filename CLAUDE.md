@@ -11,9 +11,9 @@ ERP для 3D-печатной мастерской и студии покрас
 Монорепозиторий: Turborepo + pnpm workspaces. Node >= 20, pnpm 12.
 
 **Текущее состояние:** каркас (Спринт 1.1 ✅) + контур качества кода
-(ESLint + Prettier + typecheck + скиллы команд). В `apps/*` пока только
-`package.json` с зависимостями и заглушка `apps/bot/src/index.ts` —
-исходников приложений ещё нет.
+(ESLint + Prettier + typecheck + скиллы команд). `apps/web` переведён на
+Vite + React + FSD: слои, роутер, layout, страницы-заглушки (часть Спринта 2.1 🟡).
+`apps/desktop` и `apps/bot` — только package.json и заглушка бота.
 Разработка идёт строго по `ROADMAP.md`, этапы последовательно,
 не перепрыгивай вперёд без явной команды.
 
@@ -21,7 +21,9 @@ ERP для 3D-печатной мастерской и студии покрас
 
 ```
 apps/
-  web/        @prient-flow/web      Next.js 15 (App Router) + React 19,
+  web/        @prient-flow/web      Vite + React 19 + TS, Feature-Sliced Design
+                                    (app/pages/widgets/features/entities/shared,
+                                    см. apps/web/ARCHITECTURE.md), React Router 7,
                                     Tailwind, TanStack Query, three/r3f/drei
   desktop/    @prient-flow/desktop  Electron 33 + electron-vite + Vite 6,
                                     chokidar, mqtt, ws
@@ -38,6 +40,14 @@ supabase/
 
 Внутренние пакеты подключаются как `"@prient-flow/<name>": "workspace:*"`,
 entry point — `src/index.ts` (TS напрямую, без шага сборки).
+
+## Правила FSD (apps/web)
+
+- Слои импортируют только вниз: app → pages → widgets → features → entities → shared.
+- Каждый слайс — public API через `index.ts`; импорт внутренностей слайда запрещён.
+- Алиас `@/` = `apps/web/src/`.
+- Кросс-импорты внутри слоя запрещены (feature не импортирует feature).
+- Env для браузера — только с префиксом `VITE_` (см. `.env.example`).
 
 ## Границы пакетов
 
