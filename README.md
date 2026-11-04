@@ -6,15 +6,15 @@ ERP для 3D-печатной мастерской и студии покрас
 
 ## Стек
 
-| Слой            | Технологии                                                                                |
-| --------------- | ----------------------------------------------------------------------------------------- |
-| Монорепозиторий | Turborepo + pnpm workspaces                                                               |
-| Бэкенд и БД     | Supabase (PostgreSQL, Auth, Storage, Realtime)                                            |
-| Web             | Vite + React 19 + TypeScript (FSD), React Router, Tailwind CSS, shadcn/ui, TanStack Query |
-| 3D              | Three.js + @react-three/fiber + @react-three/drei                                         |
-| Desktop         | Electron + electron-vite + React, chokidar, mqtt                                          |
-| Telegram-бот    | grammY + @grammyjs/conversations + Upstash Redis                                          |
-| Контракты       | TypeScript + Zod (`packages/shared`)                                                      |
+| Слой            | Технологии                                                                           |
+| --------------- | ------------------------------------------------------------------------------------ |
+| Монорепозиторий | Turborepo + pnpm workspaces                                                          |
+| Бэкенд и БД     | Supabase (PostgreSQL, Auth, Storage, Realtime)                                       |
+| Web             | Vite + React 19 + TypeScript (FSD), React Router, Tailwind CSS, shadcn/ui, RTK-Query |
+| 3D              | Three.js + @react-three/fiber + @react-three/drei                                    |
+| Desktop         | Electron + electron-vite + React, chokidar, mqtt                                     |
+| Telegram-бот    | grammY + @grammyjs/conversations + Upstash Redis                                     |
+| Контракты       | TypeScript + Zod (`packages/shared`)                                                 |
 
 ## Структура
 
