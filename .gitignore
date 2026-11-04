@@ -27,3 +27,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Superpowers SDD scratch (ledger/briefs — локальный артефакт планов)
+.superpowers/

@@ -8,7 +8,8 @@ ERP для 3D-печатной мастерской и студии покрас
 (филамент/смола/краски), парк принтеров, расчёт себестоимости, Telegram-бот
 и десктоп-хаб для интеграции со слайсером и принтерами в локальной сети.
 
-Монорепозиторий: Turborepo + pnpm workspaces. Node >= 20, pnpm 12.
+Монорепозиторий: Turborepo + pnpm workspaces. Node >= 20, pnpm 10
+(версия закреплена в поле `packageManager` корневого package.json).
 
 **Текущее состояние:** каркас (Спринт 1.1 ✅) + контур качества кода
 (ESLint + Prettier + typecheck + скиллы команд). `apps/web` переведён на
@@ -24,7 +25,7 @@ apps/
   web/        @prient-flow/web      Vite + React 19 + TS, Feature-Sliced Design
                                     (app/pages/widgets/features/entities/shared,
                                     см. apps/web/ARCHITECTURE.md), React Router 7,
-                                    Tailwind, TanStack Query, three/r3f/drei
+                                    Tailwind, RTK Query, three/r3f/drei
   desktop/    @prient-flow/desktop  Electron 33 + electron-vite + Vite 6,
                                     chokidar, mqtt, ws
   bot/        @prient-flow/bot      grammY + @grammyjs/conversations,
@@ -102,12 +103,14 @@ pnpm db:types   # регенерировать типы БД в packages/databas
 
 ## Особенности окружения (Windows)
 
+- Версия pnpm закреплена в поле `packageManager` (`pnpm@10.32.1`) —
+  standalone-shim подгружает именно её.
 - Build-скрипты electron и esbuild одобрены через
-  `onlyBuiltDependencies` в `pnpm-workspace.yaml` + `.npmrc`.
+  `only-built-dependencies` в `.npmrc`. Ключ `allowBuilds`
+  в `pnpm-workspace.yaml` — синтаксис pnpm 11+, под закреплённый
+  pnpm 10 игнорируется (оставлен про запас, настройки живут в `.npmrc`).
   Если pnpm ругается на `ERR_PNPM_IGNORED_BUILDS` —
   `pnpm approve-builds electron esbuild -y`.
-- Поле `pnpm.*` в корневом package.json не читается pnpm 12 —
-  настройки только в `pnpm-workspace.yaml` / `.npmrc`.
 - Если standalone-shim pnpm падает с путём `.tools\pnpm\<версия>` —
   оборвалась его самодогрузка версии из поля `packageManager`.
   Лечение: удалить `%LOCALAPPDATA%\pnpm\.tools\pnpm\<версия>*`
