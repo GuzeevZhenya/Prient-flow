@@ -4,10 +4,4 @@ export const DEFECT_RISK = {
   SLA_COMPLEX: 1.15,
 } as const;
 
-export const MATERIAL_TYPES = [
-  "filament",
-  "resin",
-  "paint",
-  "primer",
-  "consumable",
-] as const;
+export const MATERIAL_TYPES = ["filament", "resin", "paint", "primer", "consumable"] as const;
