@@ -1,7 +1,7 @@
 # PROJECT-MEMORY — память проекта Prient-flow
 
 > Сжатый контекст для быстрого входа в проект (новый чат, новый агент, новый участник).
-> Обновляется по мере развития. Последняя синхронизация: 2026-11-05.
+> Обновляется по мере развития. Последняя синхронизация: 2026-11-05 (ветка Lesson-3).
 
 ## Что это
 
@@ -12,55 +12,60 @@ ERP для 3D-печатной мастерской и студии покрас
 Заложена мультитенантность (`workspaces`) — путь к SaaS.
 
 Репозиторий: https://github.com/GuzeevZhenya/Prient-flow
-Локальный путь: `D:\Kimi\Prient-flow`. Активная ветка: **Lesson-1**.
+Локальный путь: `D:\Kimi\Prient-flow`. Активная ветка: **Lesson-3**.
 
-## Ключевые архитектурные решения (приняты в чате)
+## Ключевые архитектурные решения (приняты в чатах)
 
 1. **Монорепо**: Turborepo + pnpm workspaces (`apps/*`, `packages/*`).
 2. **Web — SPA, НЕ Next.js**: Vite + React 19 + TS, React Router 7,
    архитектура **Feature-Sliced Design** (app/pages/widgets/features/entities/shared,
    правила в `apps/web/ARCHITECTURE.md`, README в каждом слое).
    Референс FSD — проект стажировки Ict.
-3. **Бэкенд = Supabase** без отдельного API-сервиса: PostgreSQL, Auth,
+3. **Дата-слой web — RTK Query** (Redux Toolkit + react-redux).
+   TanStack Query был на старте — выпилен, не возвращать.
+4. **Бэкенд = Supabase** без отдельного API-сервиса: PostgreSQL, Auth,
    Storage, Realtime. Все приложения ходят через `packages/database`.
-4. **Бизнес-логика только в `packages/shared`**: формулы цены, Zod-схемы,
+5. **Бизнес-логика только в `packages/shared`**: формулы цены, Zod-схемы,
    константы статусов. Apps — тонкие слои.
-5. **Контур качества**: ESLint (flat) + Prettier + `tsc --noEmit` в корне;
-   единая команда `pnpm ci:check` (lint + typecheck + format).
+6. **Контур качества**: ESLint (flat) + Prettier + `tsc --noEmit` + vitest
+   в корне; единая команда `pnpm ci:check`.
+
+## Правила и регламенты (источники правды)
+
+- `KIMI.md` (бывший CLAUDE.md) — главный файл правил архитектуры для ИИ-агентов.
+- `.cursor/rules/` — строгие регламенты: `typescript-strict.mdc`,
+  `data-and-state.mdc`, `definition-of-done.mdc`.
+- `.kimi-code/skills/` — команды: `/формат` (цикл качества),
+  `/заключение` (отчёт сессии в `.docs/history/` + обновление FILE-MAP.md).
+- `.kimi-code/agents/arch-reviewer.md` — read-only субагент: проверка
+  соблюдения правил и сверка доков с кодом.
+- `FILE-MAP.md` — карта файлов/папок. `ROADMAP.md` — план спринтов.
 
 ## Окружение (Windows) — важные грабли
 
-- **pnpm**: системный shim (`%LOCALAPPDATA%\pnpm`) умеет скачивать версии,
-  но скачивание 12.16.1 оборвалось → проекты падают. Решение: во всех
-  проектах `packageManager: "pnpm@10.32.1"` (уже в кэше shim'а).
-  Если сломается снова: удалить `%LOCALAPPDATA%\pnpm\.tools\pnpm\<версия>*`.
-- `ERR_PNPM_IGNORED_BUILDS` → `pnpm approve-builds electron esbuild -y`
-  (записано в `pnpm-workspace.yaml` + `.npmrc`).
-- Поле `pnpm.*` в корневом package.json pnpm не читает — настройки только
-  в `pnpm-workspace.yaml` / `.npmrc`.
-- Lockfile pnpm 10 пересоздан под свой формат (v9.0).
+- **pnpm**: системный shim (`%LOCALAPPDATA%\pnpm`) не смог докачать 12.16.1 →
+  во всех проектах закреплено `packageManager: "pnpm@10.32.1"` (в кэше shim'а).
+  Рецидив: удалить `%LOCALAPPDATA%\pnpm\.tools\pnpm\<версия>*`.
+- `ERR_PNPM_IGNORED_BUILDS` → `pnpm approve-builds electron esbuild -y`.
+- Настройки pnpm — только в `pnpm-workspace.yaml` / `.npmrc`
+  (поле `pnpm.*` в package.json игнорируется).
 - Peer-варнинг `react-composer` (drei) vs React 19 — известный, безвредный.
 
 ## Рабочий процесс
 
 - Разработка строго по `ROADMAP.md` (6 этапов → 22 спринта), последовательно.
-- Команды-скиллы в `.kimi-code/skills/`:
-  - `/формат` — полный цикл: format:fix → lint:fix → typecheck, дочинка до зелёного.
-  - `/заключение` — отчёт сессии `.docs/history/YYYY-MM-DD_printflow-summary.md`;
-    перед отчётом обновляет `FILE-MAP.md`, если менялись файлы/папки.
-- `FILE-MAP.md` — карта всех файлов/папок (что за что отвечает).
-- `CLAUDE.md` — правила архитектуры для ИИ-агентов.
-- После каждого логического шага: `pnpm ci:check` → коммит → пуш в `Lesson-1`.
+- После каждого шага: `pnpm ci:check` → коммит → пуш в текущую ветку.
+- Работа идёт из нескольких чатов — перед правками сверяться с git
+  (`git log`, `git status`), ветки меняются по урокам (Lesson-N).
 
-## Текущий статус (снимок 2026-11-05)
+## Текущий статус (снимок 2026-11-05, Lesson-3)
 
 ✅ Сделано:
 
 - Спринт 1.1 — каркас монорепо, зависимости, git.
-- Контур качества + скиллы `/формат`, `/заключение`.
-- `apps/web` на Vite + React + FSD: роутер, layout (Sidebar/Header),
-  8 страниц-заглушек, shared/api supabase-клиент, алиас `@/`.
-  Сборка и ci:check зелёные (часть Спринта 2.1 🟡).
+- Контур качества + скиллы + субагент arch-reviewer + .cursor/rules.
+- `apps/web` на Vite + React + FSD: роутер, layout, страницы-заглушки,
+  Redux store с RTK Query (часть Спринта 2.1 🟡).
 
 ⬜ Следующее по ROADMAP:
 
@@ -71,5 +76,10 @@ ERP для 3D-печатной мастерской и студии покрас
 ## Открытые вопросы / техдолг
 
 - Docker ещё не проверен — блокер Спринта 1.2.
-- `packages/database/src/database.types.ts` — заглушка до первого запуска Supabase.
-- `apps/desktop` и `apps/bot` — только манифесты + заглушка бота (Этапы 4–5).
+- `packages/database/src/database.types.ts` — заглушка до запуска Supabase.
+- `apps/desktop` и `apps/bot` — манифесты + заглушка бота (Этапы 4–5).
+
+## История снимков
+
+- 2026-11-05 — первичная память; синхронизация с Lesson-3
+  (RTK Query, KIMI.md, .cursor/rules, arch-reviewer).
