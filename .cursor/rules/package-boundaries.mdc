@@ -1,0 +1,14 @@
+---
+description: Границы packages/* и мультитенантность Supabase.
+globs: packages/**/*.{ts,tsx},apps/**/*.{ts,tsx},supabase/**/*.sql
+alwaysApply: false
+---
+
+# Границы пакетов и БД
+
+- Бизнес-логика (pricing, Zod, статусы) — только `packages/shared`.
+- `database.types.ts` генерируется (`pnpm db:types`), руками не править.
+- Существующие SQL-миграции не редактировать — только `supabase migration new`.
+- Каждый запрос к тенант-данным — `workspace_id` (RLS + явный фильтр).
+- Service-role клиент — только bot/desktop/серверные скрипты, никогда в web-бандле.
+- После смены enum/статусов в SQL — синхронно обновить Zod в shared.

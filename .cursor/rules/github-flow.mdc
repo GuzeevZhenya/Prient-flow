@@ -1,0 +1,12 @@
+---
+description: GitHub Flow for this repository
+alwaysApply: true
+---
+
+# GitHub Flow
+
+- Новая работа — ветка `feature/<slug>` от актуального `main` (или от текущей Lesson-ветки, если так ведётся урок).
+- Не коммить в `main`, пока пользователь явно не попросил.
+- Conventional Commits, описание на русском, без `Co-authored-by: Cursor`.
+- Коммит и push — только по явной просьбе.
+- Конфликты merge: спроси, какая сторона побеждает; не оставляй оба hunk'а молча.

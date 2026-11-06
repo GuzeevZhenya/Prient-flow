@@ -1,0 +1,16 @@
+---
+description: FSD и UI-конвенции apps/web (Vite + React).
+globs: apps/web/**/*.{ts,tsx,css}
+alwaysApply: false
+---
+
+# Frontend (apps/web)
+
+- Слои: app → pages → widgets → features → entities → shared. Только вниз.
+- Импорт слайса снаружи — только через `index.ts`.
+- Кросс-импорты внутри слоя запрещены.
+- Алиас `@/` = `apps/web/src/`.
+- Доменные типы/схемы/формулы — в `@prient-flow/shared`, не в `shared/` фронта.
+- UI-кит — `shared/ui`; не дублировать примитивы в слайсах.
+- После UI/layout/роутинга — проверить `pnpm --filter @prient-flow/web build` или dev.
+- Подробности: `apps/web/ARCHITECTURE.md`.
