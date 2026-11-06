@@ -2,7 +2,7 @@
 
 > Сжатый контекст для быстрого входа в проект (новый чат, новый агент, новый участник).
 > Обновляется по мере развития. Последняя синхронизация: 2026-11-07
-> (бриф следующего спринта: `.docs/memory-sprint-2.2.md`).
+> (бриф следующего спринта: `.docs/memory-sprint-2.3.md`).
 
 ## Что это
 
@@ -58,14 +58,14 @@ ERP для 3D-печатной мастерской и студии покрас
 - После каждого шага: `pnpm ci:check` → коммит (по просьбе) → пуш.
 - Перед правками сверяться с git (`git log`, `git status`); уроки — ветки Lesson-N.
 
-## Текущий статус (снимок 2026-11-06, Lesson-4)
+## Текущий статус (снимок 2026-11-07, Lesson-4 + Sprint 2.2)
 
 ✅ Сделано:
 
 - Спринт 1.1 — каркас монорепо, зависимости, git.
 - Контур качества + скиллы + субагент arch-reviewer + .cursor/rules.
 - `apps/web` на Vite + React + FSD: роутер, layout, страницы-заглушки,
-  Redux store с RTK Query (часть Спринта 2.1 🟡).
+  Redux store с RTK Query.
 - Спринт 1.2 — локальный Supabase (Docker): Studio `:54323`, API `:54321`.
 - Спринт 1.3 — миграция `init_schema`: 8 таблиц, CHECK'и = enum'ы shared,
   индексы на все FK и `workspace_id`.
@@ -82,11 +82,14 @@ ERP для 3D-печатной мастерской и студии покрас
   `workspaces.settings` (jsonb), схема `workspaceSettingsSchema` в shared,
   фича `features/workspace-settings`. Env для Vite — `apps/web/.env`
   (не коммитится, см. `.env.example`).
+- Спринт 2.2 — математическое ядро в `packages/shared`: `pricingInputSchema`,
+  `calculateCost` / `calculatePrice` (тарифы = имена settings), тесты
+  FDM/SLA/края; статусы в `constants/` через re-export Zod `.options`.
 
 ⬜ Следующее по ROADMAP:
 
-- Спринт 2.2 — математическое ядро `calculateCost()/calculatePrice()`.
-  Рабочий бриф: `.docs/memory-sprint-2.2.md`.
+- Спринт 2.3 — CRUD склада (materials) в `apps/web`.
+  Рабочий бриф: `.docs/memory-sprint-2.3.md`.
 
 ## Открытые вопросы / техдолг
 
