@@ -3,35 +3,37 @@
 > За что отвечает каждый файл и папка в репозитории.
 > Правило: этот файл обновляется командой `/заключение`, если в сессии
 > добавлялись или удалялись файлы/папки.
-> Последняя синхронизация: 2026-11-05.
+> Последняя синхронизация: 2026-11-06.
 
 ## Корень
 
-| Путь                      | Назначение                                                                               |
-| ------------------------- | ---------------------------------------------------------------------------------------- |
-| `apps/`                   | Приложения монорепозитория (web, desktop, bot)                                           |
-| `packages/`               | Переиспользуемые пакеты: БД, бизнес-логика, парсер                                       |
-| `supabase/`               | `config.toml` — конфиг локального стека; `migrations/` — SQL-миграции и RLS (пока пусто) |
-| `.kimi-code/skills/`      | Команды-скиллы агента: `/заключение`, `/формат`                                          |
-| `.kimi-code/agents/`      | Субагент arch-reviewer — архитектурный ревьюер по правилам KIMI.md (read-only)           |
-| `package.json`            | Корневой манифест: turbo-скрипты, dev-зависимости, packageManager                        |
-| `pnpm-workspace.yaml`     | Состав воркспейса + `onlyBuiltDependencies` (electron, esbuild)                          |
-| `pnpm-lock.yaml`          | Локфайл зависимостей (генерируется, руками не править)                                   |
-| `.npmrc`                  | Дублирует одобренные build-скрипты для pnpm                                              |
-| `turbo.json`              | Задачи Turborepo: dev/build/lint/test и их зависимости                                   |
-| `tsconfig.base.json`      | Базовый strict-конфиг TS для всех пакетов                                                |
-| `tsconfig.json`           | Корневой typecheck: покрывает `packages/*/src`, `apps/*/src`, алиас `@/`                 |
-| `eslint.config.mjs`       | Flat-конфиг ESLint (typescript-eslint + prettier-compat)                                 |
-| `.prettierrc.json`        | Правила форматирования Prettier                                                          |
-| `.prettierignore`         | Исключения Prettier (node_modules, dist, lockfile…)                                      |
-| `.gitignore`              | Исключения git (node_modules, .turbo, .env, dist…)                                       |
-| `.env.example`            | Шаблон переменных окружения (VITE_*, Supabase, Telegram, Upstash)                        |
-| `README.md`               | Обзор проекта: стек, структура, быстрый старт                                            |
-| `ROADMAP.md`              | Дорожная карта: 6 этапов, разбитых на спринты с чекбоксами                               |
-| `.docs/PROJECT-MEMORY.md` | Память проекта: принятые решения, грабли окружения, снимок статуса                       |
-| `KIMI.md`                 | Правила архитектуры и контекст для ИИ-агентов                                            |
-| `FILE-MAP.md`             | Этот файл — карта всех файлов                                                            |
-| `.turbo/`                 | Локальный кэш Turborepo (ускоряет повторные сборки; в git не попадает)                   |
+| Путь                  | Назначение                                                                                                                            |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `apps/`               | Приложения монорепозитория (web, desktop, bot)                                                                                        |
+| `packages/`           | Переиспользуемые пакеты: БД, бизнес-логика, парсер                                                                                    |
+| `supabase/`           | `config.toml` — конфиг локального стека; `migrations/` — `init_schema` (8 таблиц), `rls_policies`, `rls_hardening`                    |
+| `docs/`               | Планы реализации (superpowers workflow), история спецификаций                                                                         |
+| `.docs/`              | `PROJECT-MEMORY.md` — память проекта; `memory-sprints-1.3-1.5.md` — бриф спринтов 1.3–1.5; `history/` — отчёты сессий (`/заключение`) |
+| `.kimi-code/skills/`  | Команды-скиллы агента: `/заключение`, `/формат`                                                                                       |
+| `.kimi-code/agents/`  | Субагент arch-reviewer — архитектурный ревьюер по правилам KIMI.md (read-only)                                                        |
+| `.cursor/rules/`      | Строгие регламенты для Codex/Cursor: typescript-strict, data-and-state, definition-of-done                                            |
+| `package.json`        | Корневой манифест: turbo-скрипты, dev-зависимости, packageManager                                                                     |
+| `pnpm-workspace.yaml` | Состав воркспейса + `onlyBuiltDependencies` (electron, esbuild)                                                                       |
+| `pnpm-lock.yaml`      | Локфайл зависимостей (генерируется, руками не править)                                                                                |
+| `.npmrc`              | Дублирует одобренные build-скрипты для pnpm                                                                                           |
+| `turbo.json`          | Задачи Turborepo: dev/build/lint/test и их зависимости                                                                                |
+| `tsconfig.base.json`  | Базовый strict-конфиг TS для всех пакетов                                                                                             |
+| `tsconfig.json`       | Корневой typecheck: покрывает `packages/*/src`, `apps/*/src`, алиас `@/`                                                              |
+| `eslint.config.mjs`   | Flat-конфиг ESLint (typescript-eslint + prettier-compat)                                                                              |
+| `.prettierrc.json`    | Правила форматирования Prettier                                                                                                       |
+| `.prettierignore`     | Исключения Prettier (node_modules, dist, lockfile, .superpowers…)                                                                     |
+| `.gitignore`          | Исключения git (node_modules, .turbo, .env, dist, .superpowers…)                                                                      |
+| `.env.example`        | Шаблон переменных окружения (VITE_*, Supabase, Telegram, Upstash)                                                                     |
+| `README.md`           | Обзор проекта: стек, структура, быстрый старт                                                                                         |
+| `ROADMAP.md`          | Дорожная карта: 6 этапов, разбитых на спринты с чекбоксами                                                                            |
+| `KIMI.md`             | Правила архитектуры и контекст для ИИ-агентов (бывший CLAUDE.md)                                                                      |
+| `FILE-MAP.md`         | Этот файл — карта всех файлов                                                                                                         |
+| `.turbo/`             | Локальный кэш Turborepo (ускоряет повторные сборки; в git не попадает)                                                                |
 
 ## apps/ — приложения
 
@@ -52,7 +54,7 @@
 | `src/widgets/`       | Крупные блоки: `sidebar` (навигация), `header` (шапка)                                                                                          |
 | `src/features/`      | Действия пользователя (пока пусто — со Спринта 2.3)                                                                                             |
 | `src/entities/`      | Бизнес-сущности (пока пусто — со Спринта 1.5/2.3)                                                                                               |
-| `src/shared/`        | Инфраструктура: `api/supabase.ts` (клиент), `config/routes.ts` (маршруты), `ui/`, `lib/`                                                        |
+| `src/shared/`        | Инфраструктура: `api/supabase.ts` (клиент), `api/baseApi.ts` (RTK Query), `config/routes.ts`, `ui/`, `lib/`                                     |
 
 В каждом слое лежит свой `README.md` с подробным описанием.
 
@@ -71,14 +73,16 @@
 
 ## packages/ — общие пакеты
 
-| Путь                     | Назначение                                                                                                                                                                |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `packages/database/`     | Supabase-клиенты и типы БД. `src/index.ts` — фабрика клиента; `src/database.types.ts` — автогенерация (`pnpm db:types`), сейчас заглушка                                  |
-| `packages/shared/`       | Единый источник бизнес-логики: `src/pricing/` (формула себестоимости — скелет), `src/schemas/` (Zod-контракты статусов), `src/constants/` (коэффициенты, типы материалов) |
-| `packages/gcode-parser/` | Парсер метаданных .gcode/.3mf: `src/index.ts` — скелет `parseGcode()` (реализация — Этап 5)                                                                               |
+| Путь                     | Назначение                                                                                                                                                                                                                                                           |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `packages/database/`     | Supabase-клиенты и типы БД. `src/index.ts` — фабрики `createSupabaseClient` / `createServiceRoleClient`; `src/database.types.ts` — автогенерация (`pnpm db:types`, в .prettierignore); `scripts/smoke-test.ts` — смоук (`pnpm --filter @prient-flow/database smoke`) |
+| `packages/shared/`       | Единый источник бизнес-логики: `src/pricing/` (скелет формул), `src/schemas/` (Zod-контракты статусов + юнит-тесты), `src/constants/` (коэффициенты, типы материалов)                                                                                                |
+| `packages/gcode-parser/` | Парсер метаданных .gcode/.3mf: `src/index.ts` — скелет `parseGcode()` (реализация — Этап 5)                                                                                                                                                                          |
 
 ## История изменений карты
 
 - 2026-11-03 — первичное заполнение (каркас + apps/web на FSD).
 - 2026-11-04 — добавлен субагент arch-reviewer (.kimi-code/agents/).
 - 2026-11-05 — CLAUDE.md переименован в KIMI.md; добавлена память проекта (.docs/PROJECT-MEMORY.md).
+- 2026-11-06 — добавлены `.cursor/rules/`, `docs/`, `supabase/config.toml`, тесты shared; обновлён состав apps/web/src/shared.
+- 2026-11-06 — Lesson-4: миграции `init_schema`/`rls_policies`/`rls_hardening`, смоук-скрипт database, `.docs/history/`.
