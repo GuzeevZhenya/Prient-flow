@@ -36,12 +36,14 @@ supabase/
 ## Быстрый старт
 
 ```bash
+git checkout feature/cursor-agent-setup   # код уроков + Cursor-контур (не голый main)
 pnpm install          # установка зависимостей
 pnpm dev              # запуск всех приложений (turbo)
-pnpm db:start         # локальный Supabase (нужен Docker)
+pnpm db:start         # локальный Supabase (нужен Docker; для спринта 2.2 не обязателен)
 pnpm db:types         # генерация TS-типов из схемы БД
 ```
 
-План разработки по спринтам — в [ROADMAP.md](ROADMAP.md).
-Правила для Cursor-агентов — в [AGENTS.md](AGENTS.md); память проекта —
-[`.docs/PROJECT-MEMORY.md`](.docs/PROJECT-MEMORY.md).
+**Другой компьютер / новый чат агента:** [`.docs/HANDOFF.md`](.docs/HANDOFF.md).  
+Спринт 2.2 (pricing): [`.docs/memory-sprint-2.2.md`](.docs/memory-sprint-2.2.md).  
+Правила агента — [AGENTS.md](AGENTS.md); план — [ROADMAP.md](ROADMAP.md);  
+память — [`.docs/PROJECT-MEMORY.md`](.docs/PROJECT-MEMORY.md).

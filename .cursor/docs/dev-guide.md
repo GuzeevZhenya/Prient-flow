@@ -1,12 +1,27 @@
 # Dev guide
 
-## Setup (Windows)
+## Новый компьютер → сразу в работу
+
+Полный чеклист: [`.docs/HANDOFF.md`](../../.docs/HANDOFF.md).
+
+Кратко для Спринта 2.2 (без Docker):
+
+```bash
+git clone https://github.com/GuzeevZhenya/Prient-flow.git
+cd Prient-flow
+git checkout feature/cursor-agent-setup
+pnpm install
+```
+
+В Cursor открой корень репо и дай агенту бриф `.docs/memory-sprint-2.2.md`.
+
+## Setup (Windows) — полный стек
 
 1. Node >= 20, Docker Desktop (Engine running), Supabase CLI.
-2. `pnpm install` в корне (packageManager `pnpm@10.32.1`).
-3. Скопировать `.env.example` → `.env` вручную.
-4. `pnpm db:start` → ключи из `supabase status` в `.env` и `apps/web/.env`
-   (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`).
+2. `pnpm install` в корне (`packageManager`: `pnpm@10.32.1`).
+3. Скопировать `.env.example` → `.env`; создать `apps/web/.env` с
+   `VITE_SUPABASE_URL` и `VITE_SUPABASE_ANON_KEY` (см. HANDOFF).
+4. `pnpm db:start` → подставить ключи из `supabase status` в оба `.env`.
 5. `pnpm dev` — web на `:5173`.
 
 ## Грабли pnpm
@@ -21,6 +36,7 @@
 pnpm ci:check   # lint + typecheck + format
 pnpm test
 pnpm --filter @prient-flow/web build   # вместо корневого build (desktop-заглушка)
+pnpm --filter @prient-flow/shared test
 ```
 
 ## Скиллы агента

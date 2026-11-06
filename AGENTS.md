@@ -23,7 +23,9 @@ Vite + React + FSD (Спринт 2.1 ✅): слои, роутер, layout, Redux
 настройки workspace. `apps/desktop` и `apps/bot` — манифесты + заглушка бота.
 Разработка строго по `ROADMAP.md`, этапы последовательно.
 
-Подробности: `.docs/PROJECT-MEMORY.md`, `.cursor/docs/`.
+Перенос на другой ПК / старт сессии: `.docs/HANDOFF.md`.
+Бриф текущего спринта: `.docs/memory-sprint-2.2.md`.
+Память проекта: `.docs/PROJECT-MEMORY.md`. Подробности: `.cursor/docs/`.
 
 ## Карта репозитория
 
@@ -128,7 +130,9 @@ pnpm db:types   # типы БД → packages/database
 
 ## Рабочий процесс
 
+- Перед спринтом читай `.docs/HANDOFF.md` (если новая машина) и бриф
+  `.docs/memory-sprint-2.2.md` (пока 2.2 не закрыт).
 - Следующий незакрытый спринт в `ROADMAP.md` — приоритет (сейчас 2.2 — pricing).
 - После спринта: `[x]` в ROADMAP + обновить «Текущее состояние» здесь и в
-  `.docs/PROJECT-MEMORY.md`.
+  `.docs/PROJECT-MEMORY.md`; новый бриф клади в `.docs/memory-sprint-X.Y.md`.
 - Один логический спринт = один коммит (или PR).
