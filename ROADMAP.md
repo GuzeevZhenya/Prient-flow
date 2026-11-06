@@ -56,16 +56,16 @@
 
 ## Этап 2 — Склад и калькулятор (apps/web + packages/shared) ⬜
 
-### Спринт 2.1 — Каркас SPA (Vite + React + FSD) 🟡
+### Спринт 2.1 — Каркас SPA (Vite + React + FSD) ✅
 
 - [x] Vite + React 19 + TS в `apps/web`, React Router, алиас `@/`
 - [x] FSD-структура слоёв (app/pages/widgets/features/entities/shared)
       с README в каждом слое — см. `apps/web/ARCHITECTURE.md`
 - [x] Tailwind CSS; RTK Query-провайдер; базовый layout (Sidebar + Header)
-- [ ] shadcn/ui-подобный UI-кит в `shared/ui` (кнопки, инпуты, модалки)
-- [ ] Auth через Supabase (email/OAuth), защищённые роуты админки
-      (обёртка над react-router вместо middleware)
-- [ ] Страница настроек workspace (тарифы, маржа, валюта)
+- [x] shadcn/ui-подобный UI-кит в `shared/ui` (кнопки, инпуты, модалки)
+- [x] Auth через Supabase (email/password; OAuth — в бэклоге), защищённые роуты админки
+      (обёртка `RequireAuth` над react-router вместо middleware)
+- [x] Страница настроек workspace (тарифы, маржа, валюта)
 
 ### Спринт 2.2 — Математическое ядро (packages/shared)
 

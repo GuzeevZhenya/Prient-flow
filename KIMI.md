@@ -17,8 +17,11 @@ Supabase (1.2 ✅) + схема БД (1.3 ✅: 8 таблиц, миграция 
 RLS-изоляция тенантов (1.4 ✅) + сгенерированные типы и клиенты
 `packages/database` (1.5 ✅: `createSupabaseClient`, `createServiceRoleClient`,
 смоук `pnpm --filter @prient-flow/database smoke`). `apps/web` переведён на
-Vite + React + FSD: слои, роутер, layout, страницы-заглушки, Redux store
-с RTK Query (часть Спринта 2.1 🟡). `apps/desktop` и `apps/bot` — только
+Vite + React + FSD (Спринт 2.1 ✅): слои, роутер, layout, Redux store
+с RTK Query, UI-кит в `shared/ui` (Button/Input/Select/Modal/Card/Badge/
+Spinner), Supabase Auth (email/password) с защищёнными роутами
+(`RequireAuth`), страница настроек workspace (тарифы в
+`workspaces.settings`, схема `workspaceSettingsSchema` в shared). `apps/desktop` и `apps/bot` — только
 package.json и заглушка бота. Работает субагент `arch-reviewer` (read-only
 проверка этих правил + сверка доков с кодом, см. раздел «Скиллы и субагенты»).
 Разработка идёт строго по `ROADMAP.md`, этапы последовательно,
@@ -154,7 +157,7 @@ pnpm db:types   # регенерировать типы БД в packages/databas
 ## Рабочий процесс
 
 - Следующая невыполненная задача из `ROADMAP.md` — приоритет.
-  Сейчас это остаток Спринта 2.1 (UI-кит, Supabase Auth).
+  Сейчас это Спринт 2.2 (математическое ядро калькулятора в `packages/shared`).
 - После завершения спринта отметь его в `ROADMAP.md` (`[x]`) и обнови
   раздел «Текущее состояние» в этом файле.
 - Один логический спринт = один коммит (или PR), осмысленное сообщение.

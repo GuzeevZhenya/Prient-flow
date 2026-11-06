@@ -7,4 +7,5 @@ export const ROUTES = {
   clients: "/clients",
   settings: "/settings",
   calculator: "/calc",
+  login: "/login",
 } as const;

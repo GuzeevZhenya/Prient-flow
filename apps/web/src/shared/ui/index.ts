@@ -1,3 +1,8 @@
-// Базовые UI-примитивы (shadcn-подобные кнопки, инпуты, модалки) — Спринт 2.1.
-// Пример: export { Button } from "./button/Button";
-export {};
+export { Button, type ButtonProps } from "./button";
+export { Input, type InputProps } from "./input";
+export { Label } from "./label";
+export { Select } from "./select";
+export { Modal, type ModalProps } from "./modal";
+export { Card, CardHeader, CardTitle, CardContent } from "./card";
+export { Badge, type BadgeProps } from "./badge";
+export { Spinner } from "./spinner";

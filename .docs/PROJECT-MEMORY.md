@@ -74,10 +74,17 @@ ERP для 3D-печатной мастерской и студии покрас
 - Спринт 1.5 — `database.types.ts` сгенерирован, корневой `.env`,
   фабрика `createServiceRoleClient`, смоук-скрипт читает все 8 таблиц
   (`pnpm --filter @prient-flow/database smoke`).
+- Спринт 2.1 — каркас SPA завершён: UI-кит в `shared/ui` (Button, Input,
+  Label, Select, Modal на `<dialog>`, Card, Badge, Spinner), Supabase Auth
+  (email/password) — `entities/session` (Redux-слайс) + `SessionProvider`,
+  `features/auth` (LoginForm/LogoutButton), `pages/login`, защита роутов
+  `app/routes/RequireAuth`; страница настроек workspace — тарифы в
+  `workspaces.settings` (jsonb), схема `workspaceSettingsSchema` в shared,
+  фича `features/workspace-settings`. Env для Vite — `apps/web/.env`
+  (не коммитится, см. `.env.example`).
 
 ⬜ Следующее по ROADMAP:
 
-- Остаток 2.1 — UI-кит в `shared/ui`, Supabase Auth, защищённые роуты.
 - Спринт 2.2 — математическое ядро `calculateCost()/calculatePrice()`.
 
 ## Открытые вопросы / техдолг
@@ -85,8 +92,8 @@ ERP для 3D-печатной мастерской и студии покрас
 - Трекинг-токен: выбран заголовок `X-Tracking-Token`; если прокси будет
   резать заголовок — вернуться к RPC-обёртке.
 - pgTAP-автотесты RLS не заведены (проверка 1.4 — ручной REST-сценарий).
-- `apps/web` читает env из своей папки (Vite без envDir): при подключении
-  Auth в 2.1 понадобится `apps/web/.env` с `VITE_*` или `envDir` на корень.
+- OAuth-провайдеры для Auth (Google/GitHub) — в бэклоге: локально не
+  проверить без ключей провайдера; сейчас только email/password.
 - `apps/desktop` и `apps/bot` — манифесты + заглушка бота (Этапы 4–5).
 
 ## История снимков
@@ -94,3 +101,5 @@ ERP для 3D-печатной мастерской и студии покрас
 - 2026-11-05 — первичная память; синхронизация с Lesson-3
   (RTK Query, KIMI.md, .cursor/rules, arch-reviewer).
 - 2026-11-06 — Lesson-4: спринты 1.3–1.5 (схема БД, RLS, типы и клиенты).
+- 2026-11-06 — Lesson-4: спринт 2.1 (UI-кит, Supabase Auth + RequireAuth,
+  настройки workspace).

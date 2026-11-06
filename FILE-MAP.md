@@ -39,22 +39,22 @@
 
 ### apps/web — SPA админки + публичный калькулятор (Vite + React + FSD)
 
-| Путь                 | Назначение                                                                                                                                      |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `index.html`         | HTML-оболочка, точка монтирования `#root`                                                                                                       |
-| `vite.config.ts`     | Конфиг Vite: react-плагин, алиас `@/` → `src`, порт 5173                                                                                        |
-| `tsconfig.json`      | TS-конфиг приложения: jsx, DOM lib, paths `@/*`                                                                                                 |
-| `tailwind.config.ts` | Конфиг Tailwind (content-скан src)                                                                                                              |
-| `postcss.config.js`  | PostCSS: tailwind + autoprefixer                                                                                                                |
-| `ARCHITECTURE.md`    | Правила FSD-слоёв и карта слоёв                                                                                                                 |
-| `src/main.tsx`       | Точка входа: рендер `<App />` в `#root`                                                                                                         |
-| `src/vite-env.d.ts`  | Типы `import.meta.env` (vite/client)                                                                                                            |
-| `src/app/`           | Слой инициализации: `App.tsx`, `providers/` (Redux store + RTK Query), `routes/` (React Router), `layouts/BaseLayout.tsx`, `styles/globals.css` |
-| `src/pages/`         | Страницы-маршруты: `dashboard`, `orders`, `inventory`, `printers`, `clients`, `settings`, `calculator` (публичная), `not-found`                 |
-| `src/widgets/`       | Крупные блоки: `sidebar` (навигация), `header` (шапка)                                                                                          |
-| `src/features/`      | Действия пользователя (пока пусто — со Спринта 2.3)                                                                                             |
-| `src/entities/`      | Бизнес-сущности (пока пусто — со Спринта 1.5/2.3)                                                                                               |
-| `src/shared/`        | Инфраструктура: `api/supabase.ts` (клиент), `api/baseApi.ts` (RTK Query), `config/routes.ts`, `ui/`, `lib/`                                     |
+| Путь                 | Назначение                                                                                                                                                                        |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `index.html`         | HTML-оболочка, точка монтирования `#root`                                                                                                                                         |
+| `vite.config.ts`     | Конфиг Vite: react-плагин, алиас `@/` → `src`, порт 5173                                                                                                                          |
+| `tsconfig.json`      | TS-конфиг приложения: jsx, DOM lib, paths `@/*`                                                                                                                                   |
+| `tailwind.config.ts` | Конфиг Tailwind (content-скан src)                                                                                                                                                |
+| `postcss.config.js`  | PostCSS: tailwind + autoprefixer                                                                                                                                                  |
+| `ARCHITECTURE.md`    | Правила FSD-слоёв и карта слоёв                                                                                                                                                   |
+| `src/main.tsx`       | Точка входа: рендер `<App />` в `#root`                                                                                                                                           |
+| `src/vite-env.d.ts`  | Типы `import.meta.env` (vite/client)                                                                                                                                              |
+| `src/app/`           | Слой инициализации: `App.tsx`, `providers/` (Redux store + RTK Query + SessionProvider), `routes/` (React Router + `RequireAuth`), `layouts/BaseLayout.tsx`, `styles/globals.css` |
+| `src/pages/`         | Страницы-маршруты: `dashboard`, `orders`, `inventory`, `printers`, `clients`, `settings`, `login`, `calculator` (публичная), `not-found`                                          |
+| `src/widgets/`       | Крупные блоки: `sidebar` (навигация), `header` (шапка с email и выходом)                                                                                                          |
+| `src/features/`      | Действия пользователя: `auth` (LoginForm/LogoutButton), `workspace-settings` (форма тарифов)                                                                                      |
+| `src/entities/`      | Бизнес-сущности: `session` (Redux-слайс сессии Supabase Auth)                                                                                                                     |
+| `src/shared/`        | Инфраструктура: `api/supabase.ts` (клиент), `api/baseApi.ts` (RTK Query), `config/routes.ts`, `ui/` (Button, Input, Label, Select, Modal, Card, Badge, Spinner), `lib/`           |
 
 В каждом слое лежит свой `README.md` с подробным описанием.
 
