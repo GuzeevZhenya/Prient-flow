@@ -38,12 +38,12 @@
 - [x] Таблица `inventory_logs` (material_id, print_job_id, delta_amount, reason) — enum reason = print_success | print_fail | manual_adjustment | restock (источник значений — `packages/shared`)
 - [x] Индексы по всем FK и `workspace_id`
 
-### Спринт 1.4 — RLS-политики и мультитенантность
+### Спринт 1.4 — RLS-политики и мультитенантность ✅
 
-- [ ] Включить RLS на всех таблицах
-- [ ] Политики: пользователь видит только свои `workspaces` и связанные данные
-- [ ] Политика публичного чтения заказа по `public_tracking_token` (для трекинг-страницы)
-- [ ] Тесты политик через `supabase test db` (pgTAP) или ручная проверка
+- [x] Включить RLS на всех таблицах
+- [x] Политики: пользователь видит только свои `workspaces` и связанные данные
+- [x] Политика публичного чтения заказа по `public_tracking_token` (для трекинг-страницы)
+- [x] Тесты политик через `supabase test db` (pgTAP) или ручная проверка
 
 ### Спринт 1.5 — Генерация типов и пакет database
 
