@@ -1,5 +1,9 @@
 # arch-reviewer Agent Implementation Plan
 
+> **Актуально с 2026-11-07:** агент живёт в `.cursor/agents/arch-reviewer.md`,
+> источник правил — `AGENTS.md` (не CLAUDE.md / KIMI.md / `.kimi-code/`).
+> Ниже — исторический план реализации от 2026-11-04.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Создать read-only кастомного субагента `arch-reviewer`, который проверяет код Prient-flow против правил CLAUDE.md и сверяет документацию с фактическим кодом.

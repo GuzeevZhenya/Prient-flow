@@ -43,4 +43,5 @@ pnpm db:types         # генерация TS-типов из схемы БД
 ```
 
 План разработки по спринтам — в [ROADMAP.md](ROADMAP.md).
-Правила архитектуры для ИИ-агентов — в [KIMI.md](KIMI.md).
+Правила для Cursor-агентов — в [AGENTS.md](AGENTS.md); память проекта —
+[`.docs/PROJECT-MEMORY.md`](.docs/PROJECT-MEMORY.md).

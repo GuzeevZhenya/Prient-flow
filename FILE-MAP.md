@@ -3,7 +3,7 @@
 > За что отвечает каждый файл и папка в репозитории.
 > Правило: этот файл обновляется командой `/заключение`, если в сессии
 > добавлялись или удалялись файлы/папки.
-> Последняя синхронизация: 2026-11-06.
+> Последняя синхронизация: 2026-11-07.
 
 ## Корень
 
@@ -14,9 +14,11 @@
 | `supabase/`           | `config.toml` — конфиг локального стека; `migrations/` — `init_schema` (8 таблиц), `rls_policies`, `rls_hardening`                    |
 | `docs/`               | Планы реализации (superpowers workflow), история спецификаций                                                                         |
 | `.docs/`              | `PROJECT-MEMORY.md` — память проекта; `memory-sprints-1.3-1.5.md` — бриф спринтов 1.3–1.5; `history/` — отчёты сессий (`/заключение`) |
-| `.kimi-code/skills/`  | Команды-скиллы агента: `/заключение`, `/формат`                                                                                       |
-| `.kimi-code/agents/`  | Субагент arch-reviewer — архитектурный ревьюер по правилам KIMI.md (read-only)                                                        |
-| `.cursor/rules/`      | Строгие регламенты для Codex/Cursor: typescript-strict, data-and-state, definition-of-done                                            |
+| `.cursor/skills/`     | Скиллы Cursor: `/формат` (`format`), `/заключение` (`zaklyuchenie`)                                                                   |
+| `.cursor/agents/`     | Субагент arch-reviewer — архитектурный ревьюер по правилам AGENTS.md (read-only)                                                      |
+| `.cursor/rules/`      | Регламенты: typescript-strict, data-and-state, definition-of-done, github-flow, frontend-fsd, package-boundaries                      |
+| `.cursor/docs/`       | Подробности: architecture, database, dev-guide (не always-on)                                                                         |
+| `REVIEW.md`           | Чеклист код-ревью                                                                                                                     |
 | `package.json`        | Корневой манифест: turbo-скрипты, dev-зависимости, packageManager                                                                     |
 | `pnpm-workspace.yaml` | Состав воркспейса + `onlyBuiltDependencies` (electron, esbuild)                                                                       |
 | `pnpm-lock.yaml`      | Локфайл зависимостей (генерируется, руками не править)                                                                                |
@@ -31,7 +33,7 @@
 | `.env.example`        | Шаблон переменных окружения (VITE_*, Supabase, Telegram, Upstash)                                                                     |
 | `README.md`           | Обзор проекта: стек, структура, быстрый старт                                                                                         |
 | `ROADMAP.md`          | Дорожная карта: 6 этапов, разбитых на спринты с чекбоксами                                                                            |
-| `KIMI.md`             | Правила архитектуры и контекст для ИИ-агентов (бывший CLAUDE.md)                                                                      |
+| `AGENTS.md`           | Правила архитектуры и контекст для Cursor-агентов (бывшие CLAUDE.md → KIMI.md)                                                        |
 | `FILE-MAP.md`         | Этот файл — карта всех файлов                                                                                                         |
 | `.turbo/`             | Локальный кэш Turborepo (ускоряет повторные сборки; в git не попадает)                                                                |
 
@@ -86,3 +88,4 @@
 - 2026-11-05 — CLAUDE.md переименован в KIMI.md; добавлена память проекта (.docs/PROJECT-MEMORY.md).
 - 2026-11-06 — добавлены `.cursor/rules/`, `docs/`, `supabase/config.toml`, тесты shared; обновлён состав apps/web/src/shared.
 - 2026-11-06 — Lesson-4: миграции `init_schema`/`rls_policies`/`rls_hardening`, смоук-скрипт database, `.docs/history/`.
+- 2026-11-07 — Kimi → Cursor: `KIMI.md` → `AGENTS.md`, `.kimi-code/` → `.cursor/skills|agents`, добавлены REVIEW.md и `.cursor/docs/`.

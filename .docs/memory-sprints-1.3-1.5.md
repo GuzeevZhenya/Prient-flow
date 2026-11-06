@@ -2,7 +2,7 @@
 
 > Рабочий бриф для новой сессии. Составлено 2026-11-06, сразу после поднятия
 > локального Supabase (Спринт 1.2 ✅).
-> Источники правды: `KIMI.md` (правила), `ROADMAP.md` (чекбоксы),
+> Источники правды: `AGENTS.md` (правила; ранее KIMI.md), `ROADMAP.md` (чекбоксы),
 > `packages/shared/src/schemas` (значения enum'ов), Technical Blueprint §3 (домен).
 
 ## Где мы
@@ -18,8 +18,8 @@
 
 ## Грабли окружения (прочитать перед стартом)
 
-- После установки Docker **перезапустить Kimi Code** — иначе `docker`/`supabase`
-  не видны в терминале (PATH подхватится у нового процесса).
+- После установки Docker **перезапустить Cursor** (новый терминал агента) — иначе
+  `docker`/`supabase` могут быть не видны в PATH старого процесса.
 - Если PATH всё ещё не видит: `export PATH="$PATH:/c/Users/Guzeev/AppData/Local/Programs/DockerDesktop/resources/bin"`.
 - Порядок каждого дня: Docker Desktop (Engine running) → `pnpm db:start`.
   Данные живут в volume между запусками; `pnpm db:reset` пересоздаёт БД

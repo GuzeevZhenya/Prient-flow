@@ -1,7 +1,7 @@
 # PROJECT-MEMORY — память проекта Prient-flow
 
 > Сжатый контекст для быстрого входа в проект (новый чат, новый агент, новый участник).
-> Обновляется по мере развития. Последняя синхронизация: 2026-11-06 (ветка Lesson-4).
+> Обновляется по мере развития. Последняя синхронизация: 2026-11-07 (ветка feature/cursor-agent-setup).
 
 ## Что это
 
@@ -12,7 +12,7 @@ ERP для 3D-печатной мастерской и студии покрас
 Заложена мультитенантность (`workspaces`) — путь к SaaS.
 
 Репозиторий: https://github.com/GuzeevZhenya/Prient-flow
-Локальный путь: `D:\Kimi\Prient-flow`. Активная ветка: **Lesson-4**.
+Локальный путь агента: `F:\cursor-projects\print-flow`. База урока: **Lesson-4**.
 
 ## Ключевые архитектурные решения (приняты в чатах)
 
@@ -32,14 +32,13 @@ ERP для 3D-печатной мастерской и студии покрас
 
 ## Правила и регламенты (источники правды)
 
-- `KIMI.md` (бывший CLAUDE.md) — главный файл правил архитектуры для ИИ-агентов.
-- `.cursor/rules/` — строгие регламенты: `typescript-strict.mdc`,
-  `data-and-state.mdc`, `definition-of-done.mdc`.
-- `.kimi-code/skills/` — команды: `/формат` (цикл качества),
-  `/заключение` (отчёт сессии в `.docs/history/` + обновление FILE-MAP.md).
-- `.kimi-code/agents/arch-reviewer.md` — read-only субагент: проверка
-  соблюдения правил и сверка доков с кодом.
-- `FILE-MAP.md` — карта файлов/папок. `ROADMAP.md` — план спринтов.
+- `AGENTS.md` (бывшие CLAUDE.md → KIMI.md) — главный файл правил для Cursor.
+- `.cursor/rules/` — `typescript-strict`, `data-and-state`, `definition-of-done`,
+  `github-flow`, `frontend-fsd`, `package-boundaries`.
+- `.cursor/skills/` — `/формат`, `/заключение`.
+- `.cursor/agents/arch-reviewer.md` — read-only архитектурный ревьюер.
+- `.cursor/docs/` — architecture / database / dev-guide.
+- `REVIEW.md` — чеклист PR. `FILE-MAP.md` — карта файлов. `ROADMAP.md` — спринты.
 
 ## Окружение (Windows) — важные грабли
 
@@ -54,9 +53,8 @@ ERP для 3D-печатной мастерской и студии покрас
 ## Рабочий процесс
 
 - Разработка строго по `ROADMAP.md` (6 этапов → 22 спринта), последовательно.
-- После каждого шага: `pnpm ci:check` → коммит → пуш в текущую ветку.
-- Работа идёт из нескольких чатов — перед правками сверяться с git
-  (`git log`, `git status`), ветки меняются по урокам (Lesson-N).
+- После каждого шага: `pnpm ci:check` → коммит (по просьбе) → пуш.
+- Перед правками сверяться с git (`git log`, `git status`); уроки — ветки Lesson-N.
 
 ## Текущий статус (снимок 2026-11-06, Lesson-4)
 
@@ -103,3 +101,5 @@ ERP для 3D-печатной мастерской и студии покрас
 - 2026-11-06 — Lesson-4: спринты 1.3–1.5 (схема БД, RLS, типы и клиенты).
 - 2026-11-06 — Lesson-4: спринт 2.1 (UI-кит, Supabase Auth + RequireAuth,
   настройки workspace).
+- 2026-11-07 — миграция агентского контура Kimi → Cursor (`AGENTS.md`,
+  `.cursor/skills|agents|docs`, REVIEW.md).
