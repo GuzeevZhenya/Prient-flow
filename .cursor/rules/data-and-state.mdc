@@ -1,0 +1,34 @@
+---
+description: Данные и стейт — серверный стейт только через RTK Query, клиент Supabase единый, UI без localStorage
+globs: **/*.ts,**/*.tsx
+alwaysApply: false
+---
+
+# Работа с данными и стейтом
+
+| Слабо ❌ | Сильно ✅ |
+|---|---|
+| «Работай с хранилищем аккуратно» | «Запрещено обращаться к Supabase/localStorage напрямую из UI-компонентов — только RTK Query-эндпоинты и единый клиент в `shared/api`» |
+
+## Правила
+
+1. Клиент Supabase — единственный, в `apps/web/src/shared/api/supabase.ts`. Создавать
+   `createClient` в компонентах/фичах запрещено.
+2. Серверные данные — только через RTK Query: эндпоинты добавляются через
+   `baseApi.injectEndpoints()` в слайсах `entities/`/`features/`, хуки в UI.
+   Грузить серверные данные в `useState` запрещено.
+3. Локальный UI-стейт (видимость, ввод формы до сабмита) — обычный React state.
+4. `localStorage`/`sessionStorage` в компонентах запрещены. Если сценарий появится —
+   только через обёртку в `shared/lib` (согласовать отдельно).
+5. Браузерный env — только `import.meta.env.VITE_*`; `SUPABASE_SERVICE_ROLE_KEY` и прочие
+   серверные секреты в коде web запрещены полностью.
+
+## Пример
+
+```typescript
+// ❌ ПЛОХО: компонент ходит в БД сам
+useEffect(() => { supabase.from("materials").select().then(setRows) }, []);
+
+// ✅ ХОРОШО: эндпоинт в entities/material/api, в компоненте — хук
+const { data: rows } = useGetMaterialsQuery();
+```
