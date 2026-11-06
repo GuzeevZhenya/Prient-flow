@@ -20,10 +20,10 @@
 
 ### Спринт 1.2 — Локальный Supabase
 
-- [ ] Установить Supabase CLI (`pnpm add -g supabase` или scoop)
-- [ ] `supabase init` → проверить `supabase/config.toml`
-- [ ] `pnpm db:start` — поднять локальный стек (Docker)
-- [ ] Проверить доступ к Studio (http://localhost:54323)
+- [x] Установить Supabase CLI (`pnpm add -g supabase` или scoop)
+- [x] `supabase init` → проверить `supabase/config.toml`
+- [x] `pnpm db:start` — поднять локальный стек (Docker)
+- [x] Проверить доступ к Studio (http://localhost:54323)
 
 ### Спринт 1.3 — SQL-миграция: схема БД
 
@@ -31,11 +31,11 @@
 - [ ] Таблица `workspaces` (id, name, slug, owner_id, settings jsonb)
 - [ ] Таблица `clients` (workspace_id, name, phone, telegram_username, telegram_chat_id)
 - [ ] Таблица `materials` (type, brand, name, color_hex, initial_amount, remaining_amount, cost_per_unit, low_stock_threshold)
-- [ ] Таблица `printers` (name, technology, connection_type, local_ip, access_code, power_watts, depreciation_per_hour, status)
+- [ ] Таблица `printers` (name, technology, connection_type, local_ip, access_code, power_watts, depreciation_per_hour, status) — enum: connection_type = bambu_mqtt | moonraker | octoprint | manual; status = idle | printing | paused | error | offline (источник значений — `packages/shared`)
 - [ ] Таблица `orders` (client_id, order_number, status, total_price, calculated_cost, is_paid, public_tracking_token)
 - [ ] Таблица `order_items` (order_id, name, quantity, technology, stl/gcode/thumbnail paths, material_id, estimated_weight_g, estimated_time_sec, post_processing_mins)
-- [ ] Таблица `print_jobs` (order_item_id, printer_id, started_at, finished_at, status, actual_weight_used_g, failure_reason)
-- [ ] Таблица `inventory_logs` (material_id, print_job_id, delta_amount, reason)
+- [ ] Таблица `print_jobs` (order_item_id, printer_id, started_at, finished_at, status, actual_weight_used_g, failure_reason) — enum status = queued | printing | success | failed (источник значений — `packages/shared`)
+- [ ] Таблица `inventory_logs` (material_id, print_job_id, delta_amount, reason) — enum reason = print_success | print_fail | manual_adjustment | restock (источник значений — `packages/shared`)
 - [ ] Индексы по всем FK и `workspace_id`
 
 ### Спринт 1.4 — RLS-политики и мультитенантность
@@ -127,6 +127,7 @@
 - [ ] Обработка алертов принтеров: ✅ Снять со стола / ❌ Брак / 🛑 СТОП
 - [ ] Диалог списания брака: «на каком % остановили?» → частичное списание
 - [ ] Команда `/stock` — быстрый просмотр и пополнение склада
+- [ ] Голосовое/текстовое пополнение склада: LLM парсит сообщение мастера («открыл катушку PETG и баночку грунта») → JSON → пополнение остатков (blueprint §4А)
 - [ ] Фотоотчёт: фото → Supabase Storage → пересылка клиенту
 
 ### Спринт 4.3 — Режим клиента
