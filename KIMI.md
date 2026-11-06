@@ -12,7 +12,11 @@ ERP для 3D-печатной мастерской и студии покрас
 (версия закреплена в поле `packageManager` корневого package.json).
 
 **Текущее состояние:** каркас (Спринт 1.1 ✅) + контур качества кода
-(ESLint + Prettier + typecheck + vitest + скиллы команд). `apps/web` переведён на
+(ESLint + Prettier + typecheck + vitest + скиллы команд) + локальный
+Supabase (1.2 ✅) + схема БД (1.3 ✅: 8 таблиц, миграция `init_schema`) +
+RLS-изоляция тенантов (1.4 ✅) + сгенерированные типы и клиенты
+`packages/database` (1.5 ✅: `createSupabaseClient`, `createServiceRoleClient`,
+смоук `pnpm --filter @prient-flow/database smoke`). `apps/web` переведён на
 Vite + React + FSD: слои, роутер, layout, страницы-заглушки, Redux store
 с RTK Query (часть Спринта 2.1 🟡). `apps/desktop` и `apps/bot` — только
 package.json и заглушка бота. Работает субагент `arch-reviewer` (read-only
@@ -59,7 +63,7 @@ entry point — `src/index.ts` (TS напрямую, без шага сборк�
   Никакой бизнес-логики в apps/* — только вызовы shared.
 - `packages/database` — Supabase-клиенты и типы БД. Типы
   `database.types.ts` генерируются командой `pnpm db:types`,
-  руками не править (сейчас там заглушка до первого запуска Supabase).
+  руками не править (файл генерируемый, в `.prettierignore`).
 - `packages/gcode-parser` — чистые функции без I/O, покрываются тестами.
 - `apps/web`, `apps/desktop`, `apps/bot` — тонкие слои над packages.
 
@@ -150,7 +154,7 @@ pnpm db:types   # регенерировать типы БД в packages/databas
 ## Рабочий процесс
 
 - Следующая невыполненная задача из `ROADMAP.md` — приоритет.
-  Сейчас это Спринт 1.2 (локальный Supabase).
+  Сейчас это остаток Спринта 2.1 (UI-кит, Supabase Auth).
 - После завершения спринта отметь его в `ROADMAP.md` (`[x]`) и обнови
   раздел «Текущее состояние» в этом файле.
 - Один логический спринт = один коммит (или PR), осмысленное сообщение.

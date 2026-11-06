@@ -45,12 +45,12 @@
 - [x] Политика публичного чтения заказа по `public_tracking_token` (для трекинг-страницы)
 - [x] Тесты политик через `supabase test db` (pgTAP) или ручная проверка
 
-### Спринт 1.5 — Генерация типов и пакет database
+### Спринт 1.5 — Генерация типов и пакет database ✅
 
-- [ ] `pnpm db:types` → `packages/database/src/database.types.ts`
-- [ ] Фабрики клиентов: browser-клиент, server-клиент (SSR), service-role
-- [ ] `.env` на основе `.env.example`, подключение к локальному Supabase
-- [ ] Проверка: тестовый скрипт читает список таблиц
+- [x] `pnpm db:types` → `packages/database/src/database.types.ts`
+- [x] Фабрики клиентов: browser-клиент, service-role (SSR-фабрика осознанно не нужна — Vite SPA, не Next.js)
+- [x] `.env` на основе `.env.example`, подключение к локальному Supabase
+- [x] Проверка: тестовый скрипт читает список таблиц (`pnpm --filter @prient-flow/database smoke`)
 
 ---
 

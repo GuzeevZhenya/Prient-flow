@@ -9,3 +9,4 @@ pnpm-lock.yaml
 supabase/.temp
 *.log
 .superpowers
+packages/database/src/database.types.ts
