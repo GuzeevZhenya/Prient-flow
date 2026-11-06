@@ -25,18 +25,18 @@
 - [x] `pnpm db:start` — поднять локальный стек (Docker)
 - [x] Проверить доступ к Studio (http://localhost:54323)
 
-### Спринт 1.3 — SQL-миграция: схема БД
+### Спринт 1.3 — SQL-миграция: схема БД ✅
 
-- [ ] `supabase migration new init_schema`
-- [ ] Таблица `workspaces` (id, name, slug, owner_id, settings jsonb)
-- [ ] Таблица `clients` (workspace_id, name, phone, telegram_username, telegram_chat_id)
-- [ ] Таблица `materials` (type, brand, name, color_hex, initial_amount, remaining_amount, cost_per_unit, low_stock_threshold)
-- [ ] Таблица `printers` (name, technology, connection_type, local_ip, access_code, power_watts, depreciation_per_hour, status) — enum: connection_type = bambu_mqtt | moonraker | octoprint | manual; status = idle | printing | paused | error | offline (источник значений — `packages/shared`)
-- [ ] Таблица `orders` (client_id, order_number, status, total_price, calculated_cost, is_paid, public_tracking_token)
-- [ ] Таблица `order_items` (order_id, name, quantity, technology, stl/gcode/thumbnail paths, material_id, estimated_weight_g, estimated_time_sec, post_processing_mins)
-- [ ] Таблица `print_jobs` (order_item_id, printer_id, started_at, finished_at, status, actual_weight_used_g, failure_reason) — enum status = queued | printing | success | failed (источник значений — `packages/shared`)
-- [ ] Таблица `inventory_logs` (material_id, print_job_id, delta_amount, reason) — enum reason = print_success | print_fail | manual_adjustment | restock (источник значений — `packages/shared`)
-- [ ] Индексы по всем FK и `workspace_id`
+- [x] `supabase migration new init_schema`
+- [x] Таблица `workspaces` (id, name, slug, owner_id, settings jsonb)
+- [x] Таблица `clients` (workspace_id, name, phone, telegram_username, telegram_chat_id)
+- [x] Таблица `materials` (type, brand, name, color_hex, initial_amount, remaining_amount, cost_per_unit, low_stock_threshold)
+- [x] Таблица `printers` (name, technology, connection_type, local_ip, access_code, power_watts, depreciation_per_hour, status) — enum: connection_type = bambu_mqtt | moonraker | octoprint | manual; status = idle | printing | paused | error | offline (источник значений — `packages/shared`)
+- [x] Таблица `orders` (client_id, order_number, status, total_price, calculated_cost, is_paid, public_tracking_token)
+- [x] Таблица `order_items` (order_id, name, quantity, technology, stl/gcode/thumbnail paths, material_id, estimated_weight_g, estimated_time_sec, post_processing_mins)
+- [x] Таблица `print_jobs` (order_item_id, printer_id, started_at, finished_at, status, actual_weight_used_g, failure_reason) — enum status = queued | printing | success | failed (источник значений — `packages/shared`)
+- [x] Таблица `inventory_logs` (material_id, print_job_id, delta_amount, reason) — enum reason = print_success | print_fail | manual_adjustment | restock (источник значений — `packages/shared`)
+- [x] Индексы по всем FK и `workspace_id`
 
 ### Спринт 1.4 — RLS-политики и мультитенантность
 
