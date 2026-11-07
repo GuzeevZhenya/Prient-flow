@@ -44,3 +44,6 @@ pnpm --filter @prient-flow/shared test
 - `/формат` — цикл автофикса качества
 - `/заключение` — отчёт сессии + FILE-MAP
 - «прогони arch-reviewer» — read-only архитектурный отчёт
+- Superpowers: только `systematic-debugging`, `tdd-packages`,
+  `verification-before-completion`, `receiving-code-review`,
+  `dispatching-parallel-agents` (см. `superpowers-allowlist.mdc`)

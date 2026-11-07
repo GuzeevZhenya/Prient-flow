@@ -75,10 +75,14 @@ supabase/
   или `any`), сразу скажи об этом до кода.
 - **План без ожидания**: кратко опиши план (файлы + правила) и сразу реализуй.
   Вопрос пользователю — только если без ответа нельзя выбрать поведение.
+- **Баг** → скилл `systematic-debugging` (причина до патча).
+- **Код в `packages/*`** → скилл `tdd-packages` (тест первым). UI — браузер.
 - **DoD**: перед финальным ответом — `pnpm ci:check`; при правках `packages/*` —
-  ещё `pnpm test` (см. `.cursor/rules/definition-of-done.mdc`).
+  ещё `pnpm test` (см. `.cursor/rules/definition-of-done.mdc` и
+  `verification-before-completion`).
 - Коммиты и PR — только по явной просьбе; Conventional Commits, без
   `Co-authored-by: Cursor`.
+- Плагин Superpowers: только allowlist в `.cursor/rules/superpowers-allowlist.mdc`.
 
 ## Команды
 
@@ -106,6 +110,8 @@ pnpm db:types   # типы БД → packages/database
 
 - `/формат` → `format` — format:fix → lint:fix → typecheck до зелёного.
 - `/заключение` → `zaklyuchenie` — отчёт в `.docs/history/` + обновление FILE-MAP.
+- `systematic-debugging`, `verification-before-completion`,
+  `receiving-code-review`, `dispatching-parallel-agents`, `tdd-packages`.
 
 Субагенты (`.cursor/agents/`):
 
