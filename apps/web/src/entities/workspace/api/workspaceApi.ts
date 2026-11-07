@@ -3,7 +3,13 @@ import {
   workspaceSettingsSchema,
   type WorkspaceSettings,
 } from "@prient-flow/shared";
-import { baseApi, getQueryErrorMessage, supabase, toQueryError } from "@/shared/api";
+import {
+  baseApi,
+  getQueryErrorMessage,
+  mapSupabaseError,
+  supabase,
+  toQueryError,
+} from "@/shared/api";
 import type { Workspace } from "../model/types";
 
 function parseWorkspace(row: {
@@ -35,7 +41,7 @@ export const workspaceApi = baseApi.injectEndpoints({
           .maybeSingle();
 
         if (error) {
-          return { error: toQueryError("Не удалось загрузить workspace") };
+          return { error: toQueryError(mapSupabaseError(error, "Не удалось загрузить workspace")) };
         }
         if (!data) {
           return { data: null };
@@ -43,6 +49,49 @@ export const workspaceApi = baseApi.injectEndpoints({
         return { data: parseWorkspace(data) };
       },
       providesTags: [{ type: "Workspace", id: "CURRENT" }],
+    }),
+    ensureWorkspace: builder.mutation<Workspace, { ownerId: string; name: string }>({
+      async queryFn({ ownerId, name }) {
+        const { data: existing, error: readError } = await supabase
+          .from("workspaces")
+          .select("id, name, slug, owner_id, settings")
+          .eq("owner_id", ownerId)
+          .limit(1)
+          .maybeSingle();
+
+        if (readError) {
+          return {
+            error: toQueryError(mapSupabaseError(readError, "Не удалось проверить workspace")),
+          };
+        }
+        if (existing) {
+          return { data: parseWorkspace(existing) };
+        }
+
+        const slug = `ws-${ownerId.replaceAll("-", "").slice(0, 12)}`;
+        const { data, error } = await supabase
+          .from("workspaces")
+          .insert({
+            name,
+            slug,
+            owner_id: ownerId,
+            settings: defaultWorkspaceSettings,
+          })
+          .select("id, name, slug, owner_id, settings")
+          .single();
+
+        if (error || !data) {
+          return {
+            error: toQueryError(
+              error
+                ? mapSupabaseError(error, "Не удалось создать workspace")
+                : "Не удалось создать workspace",
+            ),
+          };
+        }
+        return { data: parseWorkspace(data) };
+      },
+      invalidatesTags: [{ type: "Workspace", id: "CURRENT" }],
     }),
     updateWorkspaceSettings: builder.mutation<
       WorkspaceSettings,
@@ -73,4 +122,8 @@ export const workspaceApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetWorkspaceByOwnerQuery, useUpdateWorkspaceSettingsMutation } = workspaceApi;
+export const {
+  useGetWorkspaceByOwnerQuery,
+  useEnsureWorkspaceMutation,
+  useUpdateWorkspaceSettingsMutation,
+} = workspaceApi;

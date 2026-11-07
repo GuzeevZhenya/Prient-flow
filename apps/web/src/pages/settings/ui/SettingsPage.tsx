@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui";
 import { WorkspaceSettingsForm } from "@/features/workspace-settings";
+import { SeedDemoCard } from "@/features/demo-seed";
 
 export function SettingsPage() {
   return (
@@ -16,6 +17,7 @@ export function SettingsPage() {
           <WorkspaceSettingsForm />
         </CardContent>
       </Card>
+      <SeedDemoCard />
     </section>
   );
 }

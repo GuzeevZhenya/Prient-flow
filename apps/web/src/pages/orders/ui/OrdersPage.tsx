@@ -64,7 +64,10 @@ export function OrdersPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Заказы</h1>
-          <p className="mt-1 text-slate-500">Канбан по статусам. Карточку можно перетащить.</p>
+          <p className="mt-1 text-slate-500">
+            Очередь цеха: просчёт → печать → постобработка → покраска → выдача. Карточку можно
+            перетащить.
+          </p>
         </div>
         <Button onClick={openCreate}>Новый заказ</Button>
       </div>

@@ -75,7 +75,9 @@ export function ClientsPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Клиенты</h1>
-          <p className="mt-1 text-slate-500">База клиентов мастерской</p>
+          <p className="mt-1 text-slate-500">
+            Частники и студии. Telegram — чтобы бот потом писал статус заказа.
+          </p>
         </div>
         <Button onClick={openCreate}>Добавить клиента</Button>
       </div>

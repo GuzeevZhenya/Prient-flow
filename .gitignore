@@ -30,3 +30,9 @@ Thumbs.db
 
 # Superpowers SDD scratch (ledger/briefs — локальный артефакт планов)
 .superpowers/
+
+# Сгенерированные ролики (гайд/реклама)
+.docs/videos/*.mp4
+.docs/videos/audio/
+.docs/videos/frames/
+.docs/videos/clips/

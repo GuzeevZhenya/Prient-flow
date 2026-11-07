@@ -5,6 +5,8 @@ import "@/entities/workspace";
 import "@/entities/material";
 import "@/entities/client";
 import "@/entities/order";
+import "@/entities/printer";
+import "@/features/demo-seed";
 
 export const store = configureStore({
   reducer: {

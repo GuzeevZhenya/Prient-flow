@@ -1,3 +1,3 @@
 export { supabase } from "./supabase";
 export { baseApi } from "./baseApi";
-export { toQueryError, getQueryErrorMessage } from "./queryError";
+export { toQueryError, getQueryErrorMessage, mapSupabaseError } from "./queryError";

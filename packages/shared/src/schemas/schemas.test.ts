@@ -4,6 +4,8 @@ import {
   applyInventoryDelta,
   clientCreateSchema,
   clientUpdateSchema,
+  loginCredentialsSchema,
+  registerCredentialsSchema,
   connectionTypeSchema,
   inventoryMovementSchema,
   inventoryReasonSchema,
@@ -17,6 +19,7 @@ import {
   orderStatusUpdateSchema,
   orderUpdateSchema,
   printJobStatusSchema,
+  printerCreateSchema,
   printerStatusSchema,
 } from "./index";
 
@@ -239,5 +242,78 @@ describe("orderUpdateSchema и статус", () => {
   it("orderStatusUpdateSchema принимает только доменные статусы", () => {
     expect(orderStatusUpdateSchema.parse({ status: "printing" })).toEqual({ status: "printing" });
     expect(orderStatusUpdateSchema.safeParse({ status: "shipped" }).success).toBe(false);
+  });
+});
+
+describe("printerCreateSchema", () => {
+  const validPrinter = {
+    name: "Bambu Lab X1 Carbon",
+    technology: "FDM",
+    connection_type: "bambu_mqtt",
+    local_ip: "192.168.1.40",
+    access_code: "12345678",
+    power_watts: 350,
+    depreciation_per_hour: 1.2,
+    status: "printing",
+  };
+
+  it("принимает FDM-принтер со статусом и нормализует пустой IP в null", () => {
+    expect(printerCreateSchema.parse(validPrinter)).toEqual(validPrinter);
+    expect(printerCreateSchema.parse({ ...validPrinter, local_ip: "  " }).local_ip).toBeNull();
+    expect(printerCreateSchema.parse({ ...validPrinter, access_code: "" }).access_code).toBeNull();
+  });
+
+  it("подставляет status=offline, если статус не передан", () => {
+    const { status: _status, ...withoutStatus } = validPrinter;
+    expect(printerCreateSchema.parse(withoutStatus).status).toBe("offline");
+  });
+
+  it("отклоняет пустое имя, чужую технологию и отрицательную мощность", () => {
+    expect(printerCreateSchema.safeParse({ ...validPrinter, name: "  " }).success).toBe(false);
+    expect(printerCreateSchema.safeParse({ ...validPrinter, technology: "SLS" }).success).toBe(
+      false,
+    );
+    expect(printerCreateSchema.safeParse({ ...validPrinter, power_watts: -1 }).success).toBe(false);
+    expect(printerCreateSchema.safeParse({ ...validPrinter, status: "busy" }).success).toBe(false);
+  });
+});
+
+describe("loginCredentialsSchema", () => {
+  it("принимает email и алиас admin", () => {
+    expect(
+      loginCredentialsSchema.parse({ email: "master@workshop.by", password: "secret1" }).email,
+    ).toBe("master@workshop.by");
+    expect(loginCredentialsSchema.parse({ email: "admin", password: "admin123" }).email).toBe(
+      "admin@prient-flow.local",
+    );
+  });
+
+  it("отклоняет короткий пароль и мусор вместо email", () => {
+    expect(loginCredentialsSchema.safeParse({ email: "admin", password: "123" }).success).toBe(
+      false,
+    );
+    expect(
+      loginCredentialsSchema.safeParse({ email: "not-an-email", password: "secret1" }).success,
+    ).toBe(false);
+  });
+});
+
+describe("registerCredentialsSchema", () => {
+  it("нормализует admin и подставляет имя мастерской", () => {
+    expect(
+      registerCredentialsSchema.parse({
+        email: "admin",
+        password: "admin123",
+        workspaceName: "Цех",
+      }),
+    ).toEqual({
+      email: "admin@prient-flow.local",
+      password: "admin123",
+      workspaceName: "Цех",
+    });
+    expect(
+      registerCredentialsSchema.parse({ email: "owner@workshop.by", password: "secret1" })
+        .workspaceName,
+    ).toBe("Мастерская");
   });
 });

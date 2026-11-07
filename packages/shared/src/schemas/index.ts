@@ -37,12 +37,30 @@ export const inventoryReasonSchema = z.enum([
 ]);
 export type InventoryReason = z.infer<typeof inventoryReasonSchema>;
 
-// Вход в админку (email/password, Спринт 2.1)
+export const ADMIN_LOGIN_ALIAS = "admin";
+export const ADMIN_EMAIL = "admin@prient-flow.local";
+
+function resolveAuthEmail(value: string): string {
+  return value.trim().toLowerCase() === ADMIN_LOGIN_ALIAS ? ADMIN_EMAIL : value.trim();
+}
+
+const authEmailSchema = z
+  .string()
+  .trim()
+  .transform(resolveAuthEmail)
+  .pipe(z.string().email("Введите email или логин admin"));
+
+// Вход в админку (email/password, Спринт 2.1). Логин `admin` → ADMIN_EMAIL.
 export const loginCredentialsSchema = z.object({
-  email: z.string().trim().email("Введите корректный email"),
+  email: authEmailSchema,
   password: z.string().min(6, "Пароль — минимум 6 символов"),
 });
 export type LoginCredentials = z.infer<typeof loginCredentialsSchema>;
+
+export const registerCredentialsSchema = loginCredentialsSchema.extend({
+  workspaceName: z.string().trim().min(1, "Укажите название мастерской").default("Мастерская"),
+});
+export type RegisterCredentials = z.infer<typeof registerCredentialsSchema>;
 
 // Тарифы мастерской — содержимое колонки workspaces.settings (jsonb)
 export const workspaceSettingsSchema = z.object({
@@ -246,3 +264,15 @@ export const orderStatusUpdateSchema = z
   })
   .strict();
 export type OrderStatusUpdateInput = z.infer<typeof orderStatusUpdateSchema>;
+
+export const printerCreateSchema = z.object({
+  name: z.string().trim().min(1, "Укажите название принтера"),
+  technology: printerTechnologySchema,
+  connection_type: connectionTypeSchema,
+  local_ip: optionalTextSchema,
+  access_code: optionalTextSchema,
+  power_watts: optionalMoneySchema,
+  depreciation_per_hour: optionalMoneySchema,
+  status: printerStatusSchema.default("offline"),
+});
+export type PrinterCreateInput = z.infer<typeof printerCreateSchema>;

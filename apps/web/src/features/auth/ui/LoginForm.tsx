@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { loginCredentialsSchema } from "@prient-flow/shared";
 import { supabase } from "@/shared/api";
 import { Button, Input, Label } from "@/shared/ui";
+import { authErrorMessage } from "../lib/authError";
 
 /**
  * Форма входа по email/паролю. После успешного входа редирект делает
@@ -28,21 +29,21 @@ export function LoginForm() {
     setLoading(false);
 
     if (authError) {
-      setError("Неверный email или пароль");
+      setError(authErrorMessage(authError, "Неверный email или пароль"));
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
-        <Label htmlFor="login-email">Email</Label>
+        <Label htmlFor="login-email">Email или логин</Label>
         <Input
           id="login-email"
-          type="email"
-          autoComplete="email"
+          type="text"
+          autoComplete="username"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="master@workshop.by"
+          placeholder="admin"
         />
       </div>
       <div>

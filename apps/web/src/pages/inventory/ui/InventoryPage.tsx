@@ -98,7 +98,9 @@ export function InventoryPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Склад</h1>
-          <p className="mt-1 text-slate-500">Катушки, смолы, краски и грунты</p>
+          <p className="mt-1 text-slate-500">
+            Катушки, смолы, краски и грунты. Красная строка — остаток ниже порога.
+          </p>
         </div>
         <Button onClick={openCreate}>Добавить материал</Button>
       </div>

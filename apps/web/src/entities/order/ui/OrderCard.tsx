@@ -17,6 +17,11 @@ export function OrderCard({ order, onEdit }: OrderCardProps) {
         </Badge>
       </div>
       <p className="mt-1 truncate text-sm text-slate-600">{order.clientName ?? "Без клиента"}</p>
+      <p className="mt-1 truncate text-xs text-slate-500">
+        {order.items.length > 0
+          ? order.items.map((item) => `${item.name} ×${item.quantity}`).join(", ")
+          : "Без позиций"}
+      </p>
       <p className="mt-2 text-sm text-slate-900">{formatMoney(order.total_price)}</p>
       <p className="mt-1 text-xs text-slate-500">Создан {formatDate(order.created_at)}</p>
       {onEdit ? (
