@@ -11,6 +11,17 @@
   - low-stock). Миграции БД не нужны — схема уже есть.
 - Ветка: `feature/cursor-agent-setup` (или `feature/inventory-crud` от неё).
 
+## Файлы и контракты между задачами
+
+| Задача      | Файлы                               | Consumes                                  | Produces                                                    |
+| ----------- | ----------------------------------- | ----------------------------------------- | ----------------------------------------------------------- |
+| 1. Zod      | `packages/shared/src/schemas/`      | `MATERIAL_TYPES`, `inventoryReasonSchema` | схемы create/update материала и движения остатка            |
+| 2. Entity   | `apps/web/src/entities/material/`   | схемы shared, `baseApi`, `workspace_id`   | RTK Query: list/create/update/adjust, public API `index.ts` |
+| 3. Features | `apps/web/src/features/material-*/` | эндпоинты entity                          | формы add/edit, списание/пополнение                         |
+| 4. Page     | `apps/web/src/pages/inventory/`     | features + entity                         | таблица, фильтр `type`, low-stock, empty/error              |
+
+Проверка Zod — `tdd-packages` (тест первым). UI — браузер, не TDD.
+
 ## Что уже есть
 
 | Путь                    | Состояние                                                                                                |

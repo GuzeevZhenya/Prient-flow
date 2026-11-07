@@ -7,35 +7,35 @@
 
 ## Корень
 
-| Путь                  | Назначение                                                                                                                |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `apps/`               | Приложения монорепозитория (web, desktop, bot)                                                                            |
-| `packages/`           | Переиспользуемые пакеты: БД, бизнес-логика, парсер                                                                        |
-| `supabase/`           | `config.toml` — конфиг локального стека; `migrations/` — `init_schema` (8 таблиц), `rls_policies`, `rls_hardening`        |
-| `docs/`               | Планы реализации (superpowers workflow), история спецификаций                                                             |
-| `.docs/`              | `HANDOFF.md` — перенос на другой ПК; `PROJECT-MEMORY.md`; брифы `memory-sprint-*.md`; `history/` — отчёты (`/заключение`) |
-| `.cursor/skills/`     | Скиллы Cursor: `/формат` (`format`), `/заключение` (`zaklyuchenie`)                                                       |
-| `.cursor/agents/`     | Субагент arch-reviewer — архитектурный ревьюер по правилам AGENTS.md (read-only)                                          |
-| `.cursor/rules/`      | Регламенты: typescript-strict, data-and-state, definition-of-done, github-flow, frontend-fsd, package-boundaries          |
-| `.cursor/docs/`       | Подробности: architecture, database, dev-guide (не always-on)                                                             |
-| `REVIEW.md`           | Чеклист код-ревью                                                                                                         |
-| `package.json`        | Корневой манифест: turbo-скрипты, dev-зависимости, packageManager                                                         |
-| `pnpm-workspace.yaml` | Состав воркспейса + `onlyBuiltDependencies` (electron, esbuild)                                                           |
-| `pnpm-lock.yaml`      | Локфайл зависимостей (генерируется, руками не править)                                                                    |
-| `.npmrc`              | Дублирует одобренные build-скрипты для pnpm                                                                               |
-| `turbo.json`          | Задачи Turborepo: dev/build/lint/test и их зависимости                                                                    |
-| `tsconfig.base.json`  | Базовый strict-конфиг TS для всех пакетов                                                                                 |
-| `tsconfig.json`       | Корневой typecheck: покрывает `packages/*/src`, `apps/*/src`, алиас `@/`                                                  |
-| `eslint.config.mjs`   | Flat-конфиг ESLint (typescript-eslint + prettier-compat)                                                                  |
-| `.prettierrc.json`    | Правила форматирования Prettier                                                                                           |
-| `.prettierignore`     | Исключения Prettier (node_modules, dist, lockfile, .superpowers…)                                                         |
-| `.gitignore`          | Исключения git (node_modules, .turbo, .env, dist, .superpowers…)                                                          |
-| `.env.example`        | Шаблон переменных окружения (VITE_*, Supabase, Telegram, Upstash)                                                         |
-| `README.md`           | Обзор проекта: стек, структура, быстрый старт                                                                             |
-| `ROADMAP.md`          | Дорожная карта: 6 этапов, разбитых на спринты с чекбоксами                                                                |
-| `AGENTS.md`           | Правила архитектуры и контекст для Cursor-агентов (бывшие CLAUDE.md → KIMI.md)                                            |
-| `FILE-MAP.md`         | Этот файл — карта всех файлов                                                                                             |
-| `.turbo/`             | Локальный кэш Turborepo (ускоряет повторные сборки; в git не попадает)                                                    |
+| Путь                  | Назначение                                                                                                                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apps/`               | Приложения монорепозитория (web, desktop, bot)                                                                                                             |
+| `packages/`           | Переиспользуемые пакеты: БД, бизнес-логика, парсер                                                                                                         |
+| `supabase/`           | `config.toml` — конфиг локального стека; `migrations/` — `init_schema` (8 таблиц), `rls_policies`, `rls_hardening`                                         |
+| `docs/`               | Планы реализации (superpowers workflow), история спецификаций                                                                                              |
+| `.docs/`              | `HANDOFF.md` — перенос на другой ПК; `PROJECT-MEMORY.md`; брифы `memory-sprint-*.md`; `history/` — отчёты (`/заключение`)                                  |
+| `.cursor/skills/`     | `/формат`, `/заключение`, `systematic-debugging`, `verification-before-completion`, `receiving-code-review`, `dispatching-parallel-agents`, `tdd-packages` |
+| `.cursor/agents/`     | Субагент arch-reviewer — архитектурный ревьюер по правилам AGENTS.md (read-only)                                                                           |
+| `.cursor/rules/`      | typescript-strict, data-and-state, definition-of-done, github-flow, frontend-fsd, package-boundaries, superpowers-allowlist                                |
+| `.cursor/docs/`       | Подробности: architecture, database, dev-guide (не always-on)                                                                                              |
+| `REVIEW.md`           | Чеклист код-ревью                                                                                                                                          |
+| `package.json`        | Корневой манифест: turbo-скрипты, dev-зависимости, packageManager                                                                                          |
+| `pnpm-workspace.yaml` | Состав воркспейса + `onlyBuiltDependencies` (electron, esbuild)                                                                                            |
+| `pnpm-lock.yaml`      | Локфайл зависимостей (генерируется, руками не править)                                                                                                     |
+| `.npmrc`              | Дублирует одобренные build-скрипты для pnpm                                                                                                                |
+| `turbo.json`          | Задачи Turborepo: dev/build/lint/test и их зависимости                                                                                                     |
+| `tsconfig.base.json`  | Базовый strict-конфиг TS для всех пакетов                                                                                                                  |
+| `tsconfig.json`       | Корневой typecheck: покрывает `packages/*/src`, `apps/*/src`, алиас `@/`                                                                                   |
+| `eslint.config.mjs`   | Flat-конфиг ESLint (typescript-eslint + prettier-compat)                                                                                                   |
+| `.prettierrc.json`    | Правила форматирования Prettier                                                                                                                            |
+| `.prettierignore`     | Исключения Prettier (node_modules, dist, lockfile, .superpowers…)                                                                                          |
+| `.gitignore`          | Исключения git (node_modules, .turbo, .env, dist, .superpowers…)                                                                                           |
+| `.env.example`        | Шаблон переменных окружения (VITE_*, Supabase, Telegram, Upstash)                                                                                          |
+| `README.md`           | Обзор проекта: стек, структура, быстрый старт                                                                                                              |
+| `ROADMAP.md`          | Дорожная карта: 6 этапов, разбитых на спринты с чекбоксами                                                                                                 |
+| `AGENTS.md`           | Правила архитектуры и контекст для Cursor-агентов (бывшие CLAUDE.md → KIMI.md)                                                                             |
+| `FILE-MAP.md`         | Этот файл — карта всех файлов                                                                                                                              |
+| `.turbo/`             | Локальный кэш Turborepo (ускоряет повторные сборки; в git не попадает)                                                                                     |
 
 ## apps/ — приложения
 
@@ -91,3 +91,4 @@
 - 2026-11-07 — Kimi → Cursor: `KIMI.md` → `AGENTS.md`, `.kimi-code/` → `.cursor/skills|agents`, добавлены REVIEW.md и `.cursor/docs/`.
 - 2026-11-07 — добавлен бриф `.docs/memory-sprint-2.2.md` (математическое ядро).
 - 2026-11-07 — добавлен `.docs/HANDOFF.md` для старта на другом компьютере.
+- 2026-11-07 — allowlist Superpowers: 5 скиллов в `.cursor/skills/` + правило `superpowers-allowlist`.

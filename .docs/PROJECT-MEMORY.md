@@ -36,8 +36,10 @@ ERP для 3D-печатной мастерской и студии покрас
 
 - `AGENTS.md` (бывшие CLAUDE.md → KIMI.md) — главный файл правил для Cursor.
 - `.cursor/rules/` — `typescript-strict`, `data-and-state`, `definition-of-done`,
-  `github-flow`, `frontend-fsd`, `package-boundaries`.
-- `.cursor/skills/` — `/формат`, `/заключение`.
+  `github-flow`, `frontend-fsd`, `package-boundaries`, `superpowers-allowlist`.
+- `.cursor/skills/` — `/формат`, `/заключение`, плюс allowlist Superpowers:
+  `systematic-debugging`, `verification-before-completion`,
+  `receiving-code-review`, `dispatching-parallel-agents`, `tdd-packages`.
 - `.cursor/agents/arch-reviewer.md` — read-only архитектурный ревьюер.
 - `.cursor/docs/` — architecture / database / dev-guide.
 - `REVIEW.md` — чеклист PR. `FILE-MAP.md` — карта файлов. `ROADMAP.md` — спринты.

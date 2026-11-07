@@ -63,8 +63,8 @@ VITE_SUPABASE_ANON_KEY=<publishable из supabase status>
 только в packages/shared. Без UI и без миграций.
 ```
 
-Агент подхватит rules из `.cursor/rules/`, скиллы `/формат` и `/заключение`,
-субагента `arch-reviewer`.
+Агент подхватит rules из `.cursor/rules/` (в т.ч. allowlist Superpowers),
+скиллы `/формат` и `/заключение`, субагента `arch-reviewer`.
 
 ## 5. Что читать (порядок)
 

@@ -1,6 +1,7 @@
 ---
 name: format
 description: Команда /формат — Prettier, ESLint и typecheck с автофиксом до зелёного. Use when user says /формат, format check, or asks to fix lint/format/types.
+disable-model-invocation: true
 ---
 
 # Команда: /формат (Prient-flow)
