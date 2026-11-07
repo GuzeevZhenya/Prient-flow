@@ -2,7 +2,7 @@
 
 > Сжатый контекст для быстрого входа в проект (новый чат, новый агент, новый участник).
 > Обновляется по мере развития. Последняя синхронизация: 2026-11-07
-> (бриф следующего спринта: `.docs/memory-sprint-2.3.md`).
+> (бриф следующего спринта: `.docs/memory-sprint-3.1.md`).
 
 ## Что это
 
@@ -60,7 +60,7 @@ ERP для 3D-печатной мастерской и студии покрас
 - После каждого шага: `pnpm ci:check` → коммит (по просьбе) → пуш.
 - Перед правками сверяться с git (`git log`, `git status`); уроки — ветки Lesson-N.
 
-## Текущий статус (снимок 2026-11-07, Lesson-4 + Sprint 2.2)
+## Текущий статус (снимок 2026-11-07, Lesson-4 + Sprint 2.4)
 
 ✅ Сделано:
 
@@ -87,11 +87,19 @@ ERP для 3D-печатной мастерской и студии покрас
 - Спринт 2.2 — математическое ядро в `packages/shared`: `pricingInputSchema`,
   `calculateCost` / `calculatePrice` (тарифы = имена settings), тесты
   FDM/SLA/края; статусы в `constants/` через re-export Zod `.options`.
+- Спринт 2.3 — CRUD склада: Zod create/update/movement в shared,
+  `entities/workspace` + `entities/material` (RTK Query, `workspace_id`),
+  формы `features/material-form` и `features/material-adjust`,
+  страница `/inventory` с фильтром по type и low-stock.
+  Settings больше не ходят в Supabase напрямую.
+- Спринт 2.4 — канбан заказов: `entities/client` + `entities/order`,
+  формы, `widgets/kanban-board` (dnd-kit → `updateOrderStatus`),
+  CRUD клиентов и позиций. На карточке дата — `created_at` (колонки срока нет).
 
 ⬜ Следующее по ROADMAP:
 
-- Спринт 2.3 — CRUD склада (materials) в `apps/web`.
-  Рабочий бриф: `.docs/memory-sprint-2.3.md`.
+- Спринт 3.1 — 3D-вьювер STL/OBJ.
+  Рабочий бриф: `.docs/memory-sprint-3.1.md`.
 
 ## Открытые вопросы / техдолг
 
@@ -112,3 +120,5 @@ ERP для 3D-печатной мастерской и студии покрас
 - 2026-11-07 — миграция агентского контура Kimi → Cursor (`AGENTS.md`,
   `.cursor/skills|agents|docs`, REVIEW.md).
 - 2026-11-07 — бриф Спринта 2.2 (pricing) в `.docs/memory-sprint-2.2.md`.
+- 2026-11-07 — Спринт 2.3 (CRUD склада); бриф 2.4 в `.docs/memory-sprint-2.4.md`.
+- 2026-11-07 — Спринт 2.4 (канбан + клиенты); бриф 3.1 в `.docs/memory-sprint-3.1.md`.

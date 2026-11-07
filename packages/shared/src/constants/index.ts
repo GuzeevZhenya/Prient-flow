@@ -1,6 +1,7 @@
 import {
   connectionTypeSchema,
   inventoryReasonSchema,
+  materialTypeSchema,
   orderStatusSchema,
   printJobStatusSchema,
   printerStatusSchema,
@@ -15,7 +16,7 @@ export const DEFECT_RISK = {
   SLA_COMPLEX: 1.15,
 } as const;
 
-export const MATERIAL_TYPES = ["filament", "resin", "paint", "primer", "consumable"] as const;
+export const MATERIAL_TYPES = materialTypeSchema.options;
 
 export const ORDER_STATUSES = orderStatusSchema.options;
 export const PRINTER_STATUSES = printerStatusSchema.options;

@@ -22,11 +22,13 @@ Vite + React + FSD (Спринт 2.1 ✅): слои, роутер, layout, Redux
 с RTK Query, UI-кит в `shared/ui`, Supabase Auth с `RequireAuth`,
 настройки workspace. Спринт 2.2 ✅: `pricingInputSchema`,
 `calculateCost` / `calculatePrice` в `packages/shared` (тарифы как в
-`workspaceSettingsSchema`). `apps/desktop` и `apps/bot` — манифесты
-и заглушка бота. Разработка строго по `ROADMAP.md`, этапы последовательно.
+`workspaceSettingsSchema`). Спринт 2.3 ✅: CRUD склада. Спринт 2.4 ✅:
+канбан заказов (dnd-kit) + CRUD клиентов/`order_items`. `apps/desktop`
+и `apps/bot` — манифесты и заглушка бота. Разработка строго по
+`ROADMAP.md`, этапы последовательно.
 
 Перенос на другой ПК / старт сессии: `.docs/HANDOFF.md`.
-Бриф текущего спринта: `.docs/memory-sprint-2.3.md`.
+Бриф текущего спринта: `.docs/memory-sprint-3.1.md`.
 Память проекта: `.docs/PROJECT-MEMORY.md`. Подробности: `.cursor/docs/`.
 
 ## Карта репозитория
@@ -139,8 +141,8 @@ pnpm db:types   # типы БД → packages/database
 ## Рабочий процесс
 
 - Перед спринтом читай `.docs/HANDOFF.md` (если новая машина) и бриф
-  `.docs/memory-sprint-2.3.md` (пока 2.3 не закрыт).
-- Следующий незакрытый спринт в `ROADMAP.md` — приоритет (сейчас 2.3 — склад).
+  `.docs/memory-sprint-3.1.md` (пока 3.1 не закрыт).
+- Следующий незакрытый спринт в `ROADMAP.md` — приоритет (сейчас 3.1 — 3D-вьювер).
 - После спринта: `[x]` в ROADMAP + обновить «Текущее состояние» здесь и в
   `.docs/PROJECT-MEMORY.md`; новый бриф клади в `.docs/memory-sprint-X.Y.md`.
 - Один логический спринт = один коммит (или PR).

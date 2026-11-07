@@ -1,6 +1,6 @@
 # HANDOFF — перенос на другой компьютер
 
-Чеклист, чтобы открыть Cursor в этом репо и сразу идти в **Спринт 2.2**.
+Чеклист, чтобы открыть Cursor в этом репо и сразу идти в **Спринт 3.1**.
 
 ## 1. Клон и ветка
 
@@ -8,18 +8,18 @@
 git clone https://github.com/GuzeevZhenya/Prient-flow.git
 cd Prient-flow
 git fetch origin
-git checkout feature/cursor-agent-setup
+git checkout feature/orders-kanban
 ```
 
-На этой ветке: код Lesson-4 (спринты 1.x–2.1) + Cursor-контур (`AGENTS.md`,
-`.cursor/`, бриф 2.2). Не начинай спринт с голого `main` — там только каркас.
+На этой ветке: спринты 1.x–2.4 + Cursor-контур. Не начинай спринт с голого
+`main` — там только каркас. Актуальное состояние — `AGENTS.md`.
 
 Альтернатива пути клона (как удобно): `F:\cursor-projects\print-flow` или
 любой другой каталог. Путь в доках не важен — важен корень репо в Cursor.
 
 ## 2. Софт на машине
 
-| Нужно сейчас (2.2)                                       | Зачем                                 |
+| Нужно сейчас (3.1)                                       | Зачем                                 |
 | -------------------------------------------------------- | ------------------------------------- |
 | Node.js ≥ 20                                             | runtime                               |
 | pnpm (подтянется через `packageManager`: `pnpm@10.32.1`) | install / test                        |
@@ -30,16 +30,16 @@ git checkout feature/cursor-agent-setup
 | Docker Desktop + Supabase CLI    | `pnpm db:start`, smoke, web Auth |
 | Аккаунт GitHub + `gh auth login` | PR из CLI                        |
 
-Спринт 2.2 — чистая математика в `packages/shared`: Docker **не обязателен**.
+Спринт 3.1 — 3D-вьювер в браузере. Docker нужен, только если проверяешь заказы.
 
 ## 3. Установка
 
 ```bash
 pnpm install
-pnpm --filter @prient-flow/shared test   # сейчас зелёный (enum-тесты)
+pnpm --filter @prient-flow/shared test   # enum + pricing + складские схемы
 ```
 
-Env для 2.2 не нужен. Когда понадобится web/БД:
+Env для web/БД:
 
 ```powershell
 Copy-Item .env.example .env
@@ -58,9 +58,9 @@ VITE_SUPABASE_ANON_KEY=<publishable из supabase status>
 3. Первое сообщение (можно копировать):
 
 ```
-Читай AGENTS.md и .docs/memory-sprint-2.2.md.
-Делай Спринт 2.2 по брифу: calculateCost/calculatePrice + Zod + vitest
-только в packages/shared. Без UI и без миграций.
+Читай AGENTS.md и .docs/memory-sprint-3.1.md.
+Делай Спринт 3.1 по брифу: ModelViewer, drop STL/OBJ, без Storage и без объёма.
+Канбан и склад не трогать.
 ```
 
 Агент подхватит rules из `.cursor/rules/` (в т.ч. allowlist Superpowers),
@@ -69,17 +69,17 @@ VITE_SUPABASE_ANON_KEY=<publishable из supabase status>
 ## 5. Что читать (порядок)
 
 1. `.docs/HANDOFF.md` — этот файл
-2. `.docs/memory-sprint-2.2.md` — бриф спринта (формулы, DoD, скоуп)
+2. `.docs/memory-sprint-3.1.md` — бриф спринта (3D-вьювер, DoD)
 3. `AGENTS.md` — инварианты
-4. `ROADMAP.md` — чекбоксы 2.2
+4. `ROADMAP.md` — чекбоксы 3.1
 5. При необходимости: `.docs/PROJECT-MEMORY.md`, `.cursor/docs/dev-guide.md`
 
 ## 6. Definition of Done спринта (кратко)
 
-- `pricingInputSchema` + `calculateCost` / `calculatePrice`
-- тесты FDM/SLA, нулевой вес, маржа
-- `pnpm --filter @prient-flow/shared test` и `pnpm ci:check` зелёные
-- ROADMAP 2.2 `[x]`, обновить снимок в PROJECT-MEMORY / «Текущее состояние» в AGENTS
+- `<ModelViewer />` с orbit/grid/light, drop STL/OBJ локально
+- без upload в Storage и без расчёта объёма
+- `pnpm ci:check`, сборка web, проверка drop в браузере
+- ROADMAP 3.1 `[x]`, обновить снимок в PROJECT-MEMORY / «Текущее состояние» в AGENTS
 
 ## 7. Если pnpm сломался (Windows)
 
