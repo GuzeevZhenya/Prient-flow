@@ -1,0 +1,33 @@
+---
+description: Строгая типизация — запрет any/@ts-ignore, явные интерфейсы для пропсов и API
+globs: **/*.ts,**/*.tsx
+alwaysApply: false
+---
+
+# Строгая типизация TypeScript
+
+| Слабо ❌ | Сильно ✅ |
+|---|---|
+| «Используй типизацию корректно» | «Строгий запрет на `any` и `@ts-ignore`. Все пропсы и ответы API — только явные интерфейсы/типы» |
+
+## Правила
+
+1. `any` запрещён. Если тип неизвестен — `unknown` + type guard. Исключение требует
+   комментария `// why-any: <причина>` прямо над строкой.
+2. `@ts-ignore` / `@ts-expect-error` запрещены без согласования.
+3. Пропсы компонентов — только через `interface Props` / `type Props` в том же файле.
+4. Ответы API и данные БД — только типы из `@prient-flow/shared` и `database.types.ts`,
+   строки-литералы полей БД запрещены.
+5. Новые сущности БД — через типы `packages/database` (генерируются, не правятся руками).
+
+## Примеры
+
+```typescript
+// ❌ ПЛОХО
+const data: any = await supabase.from("orders").select();
+function OrderCard(props: any) { ... }
+
+// ✅ ХОРОШО
+interface OrderCardProps { order: Order; onStatusChange: (id: string) => void; }
+const { data } = await supabase.from("orders").select().returns<OrderRow[]>();
+```

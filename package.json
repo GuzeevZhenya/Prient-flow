@@ -1,21 +1,33 @@
 {
   "name": "prient-flow",
   "private": true,
-  "packageManager": "pnpm@12.16.1",
+  "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
-    "lint": "turbo lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "type-check": "pnpm run typecheck",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "test": "turbo test",
+    "ci:check": "pnpm lint && pnpm typecheck && pnpm format",
     "db:start": "supabase start",
     "db:reset": "supabase db reset",
     "db:types": "supabase gen types typescript --local > packages/database/src/database.types.ts"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.10",
     "turbo": "^2.5.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.72.1"
   }
 }

@@ -1,0 +1,29 @@
+---
+description: Какие скиллы Superpowers разрешены; остальные не вызывать
+alwaysApply: true
+---
+
+# Superpowers: только allowlist
+
+Плагин Superpowers в этом репо **не используется как набор процессов**.
+Разрешены только копии в `.cursor/skills/`:
+
+- `systematic-debugging` — баг, красный тест, неожиданное поведение
+- `verification-before-completion` — перед «готово» / коммитом / PR
+- `receiving-code-review` — фидбек ревью, пока не проверен по коду
+- `dispatching-parallel-agents` — 2+ независимых падения (разные пакеты/файлы)
+- `tdd-packages` — новый код и баги в `packages/*`
+
+## Запрещено вызывать (плагин или `/скилл`)
+
+`brainstorming`, `using-superpowers`, `writing-plans`, `writing-skills`,
+`executing-plans`, `subagent-driven-development`, `using-git-worktrees`,
+`test-driven-development`, `requesting-code-review`,
+`finishing-a-development-branch`.
+
+Не ждать апрува дизайна. Не коммитить на каждый шаг. Не мержить в `main`.
+Не создавать worktree. Спека спринта — `.docs/memory-sprint-*.md` и `ROADMAP.md`.
+Архитектурное ревью — субагент `arch-reviewer`, не `requesting-code-review`.
+
+Обновление плагина Superpowers может вернуть его `SKILL.md` и session-хук.
+Этот файл всё равно главный: запрещённые скиллы не вызывать.
